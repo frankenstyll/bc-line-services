@@ -15,10 +15,10 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
 import lombok.extern.slf4j.Slf4j;
 
+//@ComponentScan(basePackages = "com.example")
 
 @Slf4j
 @LineMessageHandler
-@ComponentScan(basePackages = "com.example")
 public class BotController {
 
 	@Autowired
@@ -33,10 +33,10 @@ public class BotController {
 	}
 	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
-		System.out.println("[KtbLineNotiApplication][START]handleTextMessage");
-		System.out.println("[KtbLineNotiApplication]" + e);
+		System.out.println("[BotController][START]handleTextMessage");
+		System.out.println("[BotController]" + e);
         TextMessageContent message = e.getMessage();
-        System.out.println("[KtbLineNotiApplication][END]handleTextMessage");
-        return new TextMessage(message.getText());
+        System.out.println("[BotController][END]handleTextMessage");
+        return new TextMessage("[BotController]"+message.getText());
 	}
 }
