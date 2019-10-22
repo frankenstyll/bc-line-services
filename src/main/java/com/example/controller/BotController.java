@@ -28,10 +28,6 @@ public class BotController {
 	private MessageSource messageSource;
 
 	@EventMapping
-	public void handleDefaultMessageEvent(Event event) {
-		
-	}
-	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
 		System.out.println("[BotController][START]handleTextMessage");
 		System.out.println("[BotController]" + e);
