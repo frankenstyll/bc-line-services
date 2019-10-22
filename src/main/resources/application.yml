@@ -4,6 +4,6 @@ spring:
     encoding: UTF-8
 
 line.bot:
-  channel-token: 'X18NG51BI5J6ANMAZgzg2hfwWf4kL6PqPweTgG3EZkw'
+  channel-token: 'Qgk56WXeyZ3kQiY+rGfbgwBJfTrgdRxQGu+jwwSNPsRH6cu5UyGSQa7E6Ee33JAglr4ArzpGF6kLYuhcLLvj/DJws9VMTvVXJin7B9Ykde3fdlQQmmxdnIQ64o6UfH+8IX4JRNsD+PF5sLgkrKhYGwdB04t89/1O/w1cDnyilFU='
   channel-secret: '01fd9f585adb28aeafc27432da653d5f'
   handler.path: /callback
