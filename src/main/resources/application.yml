@@ -1,0 +1,9 @@
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+
+line.bot:
+  channel-token: 'X18NG51BI5J6ANMAZgzg2hfwWf4kL6PqPweTgG3EZkw'
+  channel-secret: '01fd9f585adb28aeafc27432da653d5f'
+  handler.path: /callback
