@@ -1,10 +1,13 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.ComponentScan;
 
 import com.linecorp.bot.client.LineMessagingClient;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
@@ -27,6 +30,7 @@ public class BotController {
 	@Autowired
 	private MessageSource messageSource;
 
+	/*
 	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
 		System.out.println("[BotController][START]handleTextMessage");
@@ -34,5 +38,27 @@ public class BotController {
         TextMessageContent message = e.getMessage();
         System.out.println("[BotController][END]handleTextMessage");
         return new TextMessage("[BotController]"+message.getText());
+	}
+	*/
+	
+	@EventMapping
+	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
+		TextMessageContent message = event.getMessage();
+		handleTextContent(event.getReplyToken(), event, message);
+	}
+	
+	private void handleTextContent(String replyToken, Event event, TextMessageContent content) {				
+		
+		try{			
+			
+			String text = content.getText();
+			String userId = event.getSource().getUserId();
+			List<Message> mes = new ArrayList<Message>();
+			
+			lineMessagingClient.pushMessage(new PushMessage(userId, mes));
+			
+		}catch(Exception e){			
+			e.printStackTrace();
+		}
 	}
 }
