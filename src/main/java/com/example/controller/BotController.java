@@ -46,26 +46,28 @@ public class BotController {
 	
 	@EventMapping
 	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
-		TextMessageContent message = event.getMessage();
-		final LineMessagingClient client = LineMessagingClient
-		        .builder("01fd9f585adb28aeafc27432da653d5f")
-		        .build();
-
 		
-		final TextMessage textMessage = new TextMessage("hello");
-		final PushMessage pushMessage = new PushMessage("Ue0f8a270ffea40064588037b51272d28",textMessage);
-		
-		
-		final BotApiResponse botApiResponse;
-		try {
-		    botApiResponse = client.pushMessage(pushMessage).get();
-		    
-		} catch (InterruptedException | ExecutionException e) {
-		    e.printStackTrace();
-		    return;
-		}
-
-		System.out.println(botApiResponse);
+//		
+//		TextMessageContent message = event.getMessage();
+//		final LineMessagingClient client = LineMessagingClient
+//		        .builder("01fd9f585adb28aeafc27432da653d5f")
+//		        .build();
+//
+//		
+//		final TextMessage textMessage = new TextMessage("hello");
+//		final PushMessage pushMessage = new PushMessage("Ue0f8a270ffea40064588037b51272d28",textMessage);
+//		
+//		
+//		final BotApiResponse botApiResponse;
+//		try {
+//		    botApiResponse = client.pushMessage(pushMessage).get();
+//		    
+//		} catch (InterruptedException | ExecutionException e) {
+//		    e.printStackTrace();
+//		    return;
+//		}
+//
+//		System.out.println(botApiResponse);
 	
 	}
 //	
