@@ -35,10 +35,14 @@ public class BotController {
 	private MessageSource messageSource;
 
     @EventMapping
-    public void handleFollow(FollowEvent event) {
+    public Message handleFollow(FollowEvent event) {
     	System.out.println("[handleFollow][START]handleFollow");
         System.out.println("User Id : " + event.getSource().getUserId());
         System.out.println("[handleFollow][END]handleFollow");
+        String messageResponse = "UserId : "+event.getSource().getUserId() 
+        		+ ", replyToken : " + event.getReplyToken();
+        
+        return new TextMessage(messageResponse);
     }
     
 	@EventMapping
