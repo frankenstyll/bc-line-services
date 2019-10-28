@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.event.Event;
+import com.linecorp.bot.model.event.FollowEvent;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.Message;
@@ -33,7 +34,13 @@ public class BotController {
 	@Autowired
 	private MessageSource messageSource;
 
-	
+    @EventMapping
+    public void handleFollow(FollowEvent event) {
+    	System.out.println("[handleFollow][START]handleFollow");
+        System.out.println("User Id : " + event.getSource().getUserId());
+        System.out.println("[handleFollow][END]handleFollow");
+    }
+    
 	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
 		System.out.println("[BotController][START]handleTextMessage");
