@@ -34,6 +34,8 @@ public class ReceiveMessage {
 			result.put("userId", userId);
 			result.put("message", "subscription message");
 			
+		}catch(Exception ex) {
+			result.put("message","error " + ex.getMessage());
 		}
 		return new Gson().toJson(result);
 	}
