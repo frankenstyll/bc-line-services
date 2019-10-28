@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +22,10 @@ public class ReceiveMessage {
 
 	
 	@GetMapping("/bcbot/subscription")
-	public @ResponseBody String subscription(MessageEvent<TextMessageContent> e) {
+	public @ResponseBody String subscription(
+			@RequestParam("replyToken") String replyToken ,
+			@RequestParam("userId") String userId
+			) {
 		System.out.println("subscription");
 		System.out.println("subscription");
 		System.out.println("subscription");
@@ -27,9 +33,6 @@ public class ReceiveMessage {
 		
 		Map<String,Object> result = new HashMap<>();
 		try {
-			String replyToken = e.getReplyToken();
-			String userId = e.getSource().getUserId();
-			
 			result.put("replyToken", replyToken);
 			result.put("userId", userId);
 			result.put("message", "subscription message");
@@ -52,3 +55,4 @@ public class ReceiveMessage {
 //		return new Gson().toJson(result);
 //	}
 }
+ 

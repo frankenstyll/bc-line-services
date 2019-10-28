@@ -40,8 +40,20 @@ public class BotController {
 		System.out.println("[BotController]" + e);
         TextMessageContent message = e.getMessage();
         System.out.println("[BotController][END]handleTextMessage");
-        String userId = e.getSource().getUserId();
-        return new TextMessage("[BotController]"+message.getText());
+        
+        String messageResponse = "";
+        try {
+        	String userId = e.getSource().getUserId();
+        	String replyToken = e.getReplyToken();
+        	
+        	messageResponse += "UserId : " + userId + ",";
+        	messageResponse += "replyToken : " + replyToken;
+        	
+    	}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+        
+        return new TextMessage("[BotController]"+ messageResponse);
 	
 	}
 	
