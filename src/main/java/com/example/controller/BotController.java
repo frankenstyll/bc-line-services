@@ -40,6 +40,7 @@ public class BotController {
 		System.out.println("[BotController]" + e);
         TextMessageContent message = e.getMessage();
         System.out.println("[BotController][END]handleTextMessage");
+        String userId = e.getSource().getUserId();
         return new TextMessage("[BotController]"+message.getText());
 	
 	}
