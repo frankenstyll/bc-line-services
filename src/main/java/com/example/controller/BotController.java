@@ -34,19 +34,19 @@ public class BotController {
 	private MessageSource messageSource;
 
 	
-//	@EventMapping
-//	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
-//		System.out.println("[BotController][START]handleTextMessage");
-//		System.out.println("[BotController]" + e);
-//        TextMessageContent message = e.getMessage();
-//        System.out.println("[BotController][END]handleTextMessage");
-//        return new TextMessage("[BotController]"+message.getText());
-//	
-//	}
-	
 	@EventMapping
-	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
-		
+	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
+		System.out.println("[BotController][START]handleTextMessage");
+		System.out.println("[BotController]" + e);
+        TextMessageContent message = e.getMessage();
+        System.out.println("[BotController][END]handleTextMessage");
+        return new TextMessage("[BotController]"+message.getText());
+	
+	}
+	
+//	@EventMapping
+//	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
+//		
 //		
 //		TextMessageContent message = event.getMessage();
 //		final LineMessagingClient client = LineMessagingClient
@@ -69,7 +69,8 @@ public class BotController {
 //
 //		System.out.println(botApiResponse);
 	
-	}
+//	}
+	
 //	
 //	private void handleTextContent(String replyToken, Event event, TextMessageContent content) {				
 		
