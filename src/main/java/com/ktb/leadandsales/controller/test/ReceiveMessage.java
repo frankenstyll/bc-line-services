@@ -52,8 +52,12 @@ public class ReceiveMessage {
 
 		System.out.println(botApiResponse);
 	}
+	
 	@PostMapping("/bcbot/pushMessage")
-	public void pushMessage() {
+	public void pushMessage(
+			@RequestParam("userId") String userId ,
+			@RequestParam("messages") List<Message> messages) {
+		
 		log.info("[START]pushMessage");
 		
 //		final LineMessagingClient client = LineMessagingClient
@@ -66,12 +70,6 @@ public class ReceiveMessage {
 //				textMessage);
 //		
 //		final BotApiResponse botApiResponse;
-//		
-		final String userId = "Ue0f8a270ffea40064588037b51272d28";
-		
-		List<Message> messages = new ArrayList<Message>();
-		Message text1 = null;
-		messages.add(text1);
 		
 		try {
 			log.info("Call push message");
