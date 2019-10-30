@@ -1,58 +1,89 @@
 package com.ktb.leadandsales.controller.test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
-import com.linecorp.bot.model.event.MessageEvent;
-import com.linecorp.bot.model.event.message.TextMessageContent;
+import com.ktb.leadandsales.line.bot.controller.LineBotController;
+import com.ktb.leadandsales.line.bot.service.LineMessageService;
+import com.linecorp.bot.client.LineMessagingClient;
+import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.quickreply.QuickReply;
+import com.linecorp.bot.model.response.BotApiResponse;
 
 @RestController
 public class ReceiveMessage {
 
+	private static final Logger log = LoggerFactory.getLogger(LineBotController.class);
 	
-	@GetMapping("/bcbot/subscription")
-	public @ResponseBody String subscription(
-			@RequestParam("replyToken") String replyToken ,
-			@RequestParam("userId") String userId
-			) {
-		System.out.println("subscription");
-		System.out.println("subscription");
-		System.out.println("subscription");
-		System.out.println("subscription");
+	@Autowired
+	LineMessageService lineService;
+	
+	@PostMapping("/bcbot/receiveMessage")
+	public void receiveMessage(@RequestParam("userId") String userId) {
+		log.info("[START]subscription");
+		log.info("[subscription][userId]" + userId);
 		
-		Map<String,Object> result = new HashMap<>();
+		final LineMessagingClient client = LineMessagingClient
+		        .builder("Qgk56WXeyZ3kQiY+rGfbgwBJfTrgdRxQGu+jwwSNPsRH6cu5UyGSQa7E6Ee33JAglr4ArzpGF6kLYuhcLLvj/DJws9VMTvVXJin7B9Ykde3fdlQQmmxdnIQ64o6UfH+8IX4JRNsD+PF5sLgkrKhYGwdB04t89/1O/w1cDnyilFU=")
+		        .build();
+
+		final TextMessage textMessage = new TextMessage("hello");
+		final PushMessage pushMessage = new PushMessage(
+		        "Ue0f8a270ffea40064588037b51272d28",
+		        textMessage);
+
+		final BotApiResponse botApiResponse;
 		try {
-			result.put("replyToken", replyToken);
-			result.put("userId", userId);
-			result.put("message", "subscription message");
-			
-		}catch(Exception ex) {
-			result.put("message","error " + ex.getMessage());
+		    botApiResponse = client.pushMessage(pushMessage).get();
+		} catch (InterruptedException | ExecutionException e) {
+		    e.printStackTrace();
+		    return;
 		}
-		return new Gson().toJson(result);
+
+		System.out.println(botApiResponse);
 	}
-//	@GetMapping("/bcbot/subscription")
-//	public @ResponseBody String subscription(HttpServletRequest request , HttpServletResponse response) {
-//		System.out.println("subscription");
-//		System.out.println("subscription");
-//		System.out.println("subscription");
-//		System.out.println("subscription");
+	@PostMapping("/bcbot/pushMessage")
+	public void pushMessage() {
+		log.info("[START]pushMessage");
+		
+//		final LineMessagingClient client = LineMessagingClient
+//				.builder("Qgk56WXeyZ3kQiY+rGfbgwBJfTrgdRxQGu+jwwSNPsRH6cu5UyGSQa7E6Ee33JAglr4ArzpGF6kLYuhcLLvj/DJws9VMTvVXJin7B9Ykde3fdlQQmmxdnIQ64o6UfH+8IX4JRNsD+PF5sLgkrKhYGwdB04t89/1O/w1cDnyilFU=")
+//				.build();
 //		
-//		Map<String,Object> result = new HashMap<>();
+//		final TextMessage textMessage = new TextMessage("hello");
+//		final PushMessage pushMessage = new PushMessage(
+//				"Ue0f8a270ffea40064588037b51272d28",
+//				textMessage);
 //		
-//		result.put("message", "subscription message");
-//		return new Gson().toJson(result);
-//	}
+//		final BotApiResponse botApiResponse;
+//		
+		final String userId = "Ue0f8a270ffea40064588037b51272d28";
+		
+		List<Message> messages = new ArrayList<Message>();
+		Message text1 = null;
+		messages.add(text1);
+		
+		try {
+			log.info("Call push message");
+			
+			lineService.handlePushTextContent(userId, messages);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		
+	}
+
 }
  

@@ -1,19 +1,29 @@
 package com.ktb.leadandsales.line.bot.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.linecorp.bot.model.event.FollowEvent;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.UnfollowEvent;
-import com.linecorp.bot.model.event.message.*;
+import com.linecorp.bot.model.event.message.AudioMessageContent;
+import com.linecorp.bot.model.event.message.ImageMessageContent;
+import com.linecorp.bot.model.event.message.LocationMessageContent;
+import com.linecorp.bot.model.event.message.StickerMessageContent;
+import com.linecorp.bot.model.event.message.TextMessageContent;
+import com.linecorp.bot.model.event.message.VideoMessageContent;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @LineMessageHandler
 public class LineBotController {
 
+	private static final Logger log = LoggerFactory.getLogger(LineBotController.class);
+	
     @Autowired
     LineMessageService service;
 

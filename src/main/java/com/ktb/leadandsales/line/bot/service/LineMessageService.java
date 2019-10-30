@@ -1,16 +1,22 @@
 package com.ktb.leadandsales.line.bot.service;
 
-import com.ktb.leadandsales.line.engine.service.TextContentService;
-import com.linecorp.bot.model.event.Event;
-import com.linecorp.bot.model.event.message.*;
-import com.linecorp.bot.model.message.StickerMessage;
-import com.linecorp.bot.model.message.TextMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ktb.leadandsales.line.engine.service.TextContentService;
+import com.linecorp.bot.model.event.Event;
+import com.linecorp.bot.model.event.message.AudioMessageContent;
+import com.linecorp.bot.model.event.message.ImageMessageContent;
+import com.linecorp.bot.model.event.message.LocationMessageContent;
+import com.linecorp.bot.model.event.message.StickerMessageContent;
+import com.linecorp.bot.model.event.message.VideoMessageContent;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.StickerMessage;
+import com.linecorp.bot.model.message.TextMessage;
 
 @Service
 public class LineMessageService {
@@ -60,4 +66,8 @@ public class LineMessageService {
         textContentService.reply(replyToken, text);
     }
 
+    public void handlePushTextContent(String userId , List<Message> messages) {
+    	service.push(userId, messages);
+    }
+    
 }
