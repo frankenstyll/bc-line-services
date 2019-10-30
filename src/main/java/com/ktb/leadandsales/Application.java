@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.ktb.leadandsales;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,11 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example")
-public class DemoApplication {
+@ComponentScan(basePackages = "com.ktb.leadandsales")
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 	
 	@Bean

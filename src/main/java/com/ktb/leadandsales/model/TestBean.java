@@ -1,4 +1,4 @@
-package com.example.model;
+package com.ktb.leadandsales.model;
 
 public class TestBean {
 
