@@ -1,14 +1,12 @@
 package com.ktb.leadandsales.controller.test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +15,7 @@ import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.model.MessageBean;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.PushMessage;
-import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.message.quickreply.QuickReply;
 import com.linecorp.bot.model.response.BotApiResponse;
 
 @RestController
@@ -56,7 +52,7 @@ public class ReceiveMessage {
 	}
 	
 	@PostMapping("/bcbot/pushMessage")
-	public void pushMessage(@ModelAttribute MessageBean messageBean) {
+	public void pushMessage(@RequestBody MessageBean messageBean) {
 		
 		log.info("[START]pushMessage");
 		
