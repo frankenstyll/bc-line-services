@@ -78,7 +78,7 @@ public class ReceiveMessage {
 			log.info("Call push message");
 			log.info("USERID : " + messageBean.getUserId());
 			log.info(""+messageBean.getMessages());
-			lineService.handleBroadCastMessageContent(messageBean.getUserId() , messageBean.getMessages());
+			lineService.handleBroadCastMessageContent("userid text" , messageBean.getMessages());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
