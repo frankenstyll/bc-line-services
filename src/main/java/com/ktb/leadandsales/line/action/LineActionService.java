@@ -40,7 +40,7 @@ public abstract class LineActionService implements ILineActionService{
                 ).get();
             } 
             else if(actionType.equalsIgnoreCase(LineConstant.ACTION_BROADCAST)) {
-            	lineMessagingClient.broadcast(new Broadcast(messages, false));
+            	lineMessagingClient.broadcast(new Broadcast(messages, true));
             	
             }
             else {
