@@ -28,5 +28,9 @@ public class LineBotService extends LineActionService {
     public void push(@NonNull String userId, @NonNull List<Message> messages) {
         actionMessage(LineConstant.ACTION_PUSH, userId, messages);
     }
+    
+    public void broadcast(@NonNull String userId, @NonNull List<Message> messages) {
+    	actionMessage(LineConstant.ACTION_BROADCAST, userId, messages);
+    }
 
 }

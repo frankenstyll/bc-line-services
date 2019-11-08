@@ -70,4 +70,8 @@ public class LineMessageService {
     	service.push(userId, messages);
     }
     
+    public void handleBroadCastMessageContent(String userId, List<Message> messages) {
+    	service.broadcast(userId, messages);
+    }
+    
 }

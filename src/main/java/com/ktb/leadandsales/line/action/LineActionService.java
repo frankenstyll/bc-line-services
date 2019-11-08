@@ -2,6 +2,7 @@ package com.ktb.leadandsales.line.action;
 
 import com.ktb.leadandsales.constant.LineConstant;
 import com.linecorp.bot.client.LineMessagingClient;
+import com.linecorp.bot.model.Broadcast;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.Message;
@@ -37,12 +38,19 @@ public abstract class LineActionService implements ILineActionService{
                 response = lineMessagingClient.pushMessage(
                         new PushMessage(to, messages)
                 ).get();
-            } else {
+            } 
+            else if(actionType.equalsIgnoreCase(LineConstant.ACTION_BROADCAST)) {
+            	lineMessagingClient.broadcast(new Broadcast(messages, false));
+            	
+            }
+            else {
                 response = lineMessagingClient.replyMessage(
                         new ReplyMessage(to, messages)
                 ).get();
             }
-            System.out.println(response.getDetails());
+            
+            //System.out.println(response.getDetails());
+            
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

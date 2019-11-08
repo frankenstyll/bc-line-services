@@ -68,6 +68,23 @@ public class ReceiveMessage {
 		}
 		
 	}
+	
+	@PostMapping("/bcbot/broadcastMessage")
+	public void broadcastMessage(@RequestBody MessageBean messageBean) {
+		
+		log.info("[START]pushMessage");
+		
+		try {
+			log.info("Call push message");
+			log.info("USERID : " + messageBean.getUserId());
+			log.info(""+messageBean.getMessages());
+			lineService.handlePushTextContent(messageBean.getUserId() , messageBean.getMessages());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+	}
 
 }
  
