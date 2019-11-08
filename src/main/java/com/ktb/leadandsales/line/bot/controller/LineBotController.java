@@ -39,6 +39,16 @@ public class LineBotController {
     }
     
 	@EventMapping
+	public String handleTextMessage(MessageEvent<TextMessageContent> e) {
+		System.out.println("[BotController][START]handleTextMessage");
+		System.out.println("[BotController]" + e);
+        TextMessageContent message = e.getMessage();
+        System.out.println("[BotController][END]handleTextMessage");
+        return "bc-line-empid";
+	}
+	
+    /*
+	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
 		System.out.println("[BotController][START]handleTextMessage");
 		System.out.println("[BotController]" + e);
@@ -60,6 +70,7 @@ public class LineBotController {
         return new TextMessage("[BotController]"+ messageResponse);
 	
 	}
+	*/
 
     @EventMapping
     public void handleUnfollow(UnfollowEvent event) {
