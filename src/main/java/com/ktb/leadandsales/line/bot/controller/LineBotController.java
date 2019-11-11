@@ -39,16 +39,6 @@ public class LineBotController {
     }
     
 	@EventMapping
-	public String handleTextMessage(MessageEvent<TextMessageContent> e) {
-		System.out.println("[BotController][START]handleTextMessage");
-		System.out.println("[BotController]" + e);
-        TextMessageContent message = e.getMessage();
-        System.out.println("[BotController][END]handleTextMessage");
-        return "bc-line-empid";
-	}
-	
-    /*
-	@EventMapping
 	public Message handleTextMessage(MessageEvent<TextMessageContent> e) {
 		System.out.println("[BotController][START]handleTextMessage");
 		System.out.println("[BotController]" + e);
@@ -60,17 +50,22 @@ public class LineBotController {
         	String userId = e.getSource().getUserId();
         	String replyToken = e.getReplyToken();
         	
-        	messageResponse += "UserId : " + userId + ",";
-        	messageResponse += "replyToken : " + replyToken;
+//        	messageResponse += "UserId : " + userId + ",";
+//        	messageResponse += "replyToken : " + replyToken;
+        	
+        	//for test
+        	messageResponse = "กรุณาระบุรหัสพนักงานเพื่อรับการแจ้งเตือนข้อมูลตาม Link ด้านล่าง\n";
+        	messageResponse += "https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid";
         	
     	}catch(Exception ex) {
 			ex.printStackTrace();
 		}
         
-        return new TextMessage("[BotController]"+ messageResponse);
+        //return new TextMessage("[BotController]"+ messageResponse);
+        return new TextMessage(messageResponse);
 	
 	}
-	*/
+	
 
     @EventMapping
     public void handleUnfollow(UnfollowEvent event) {
