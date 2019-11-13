@@ -3,14 +3,41 @@
 <html>
 	<head>
 		<title>Input employee id</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.container { 
+				width: 80% !important;
+			}
+		</style>
 	</head>	
 	<body>
-		<h3 id='message'></h3>
-		<div>
-			<input type="text" ></input>
+	
+		<div class="container">  
+			<form style="width:auto">  
+		
+				<div class="row">
+				  <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+				  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+				  <!-- Optional: clear the XS cols if their content doesn't match in height -->
+				  <div class="clearfix visible-xs-block"></div>
+				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+				</div>
+			
+				<h3 id='message'></h3>
+				<div>
+					<input type="text" ></input>
+				</div>
+			</form>
 		</div>
+		
 	</body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
 	<script src="https://d.line-scdn.net/liff/1.0/sdk.js" /></script>
 	<script>
 		var waiting = 'กรุณารอสักครู่...';
