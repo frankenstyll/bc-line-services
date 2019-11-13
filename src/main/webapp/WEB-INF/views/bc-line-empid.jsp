@@ -18,21 +18,20 @@
 			<form style="width:auto">  
 		
 				<div class="row">
-				  <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
-				  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+					<h3 id='message'></h3>
 				</div>
+				
 				<div class="row">
-				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				  <!-- Optional: clear the XS cols if their content doesn't match in height -->
-				  <div class="clearfix visible-xs-block"></div>
-				  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+				  <div class="col-xs-12 col-sm-12 col-md-12">
+				  	<input type="text" ></input>
+				  </div>
 				</div>
-			
-				<h3 id='message'></h3>
-				<div>
-					<input type="text" ></input>
+				
+				<div class="row">
+					<button type="submit" class="btn btn-success">Register</button>
+					<button type="submit" class="btn btn-default">Clear</button>
 				</div>
+				
 			</form>
 		</div>
 		
