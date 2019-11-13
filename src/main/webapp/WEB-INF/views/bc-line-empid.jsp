@@ -23,22 +23,32 @@
 		<div class="container">  
 	
 			<div class="row">
-				<h3 id='message'></h3>
-			</div>
-			
-			<div class="row">
-			  <div class="col-xs-12 col-sm-12 col-md-12">
-			  	<div class="form-group">
-				  	<input type="text" class="form-control"></input>
-			  	</div>
-			  </div>
-			</div>
-			
-			<div class="row">
-				<div class="form-group">
-					<button type="submit" class="btn btn-success">Register</button>
-					<button type="submit" class="btn btn-default">Clear</button>
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4" style="text-align: center">
+				 <label for="empId"> 	กรุณาระบุรหัสพนักงาน </label>
 				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			
+			<div class="row">
+			  	<div class="col-sm-4"></div>
+				<div class="col-xs-4 col-sm-4 col-md-4">
+				  	<div class="form-group">
+					  	<input type="text" class="form-control" id="empId"></input>
+				  	</div>
+			  	</div>
+			  	<div class="col-sm-4"></div>
+			</div>
+			
+			<div class="row align-items-center">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4 ">
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+						<button type="submit" class="btn btn-default">Clear</button>
+					</div>
+				</div>
+				<div class="col-sm-4"></div>
 			</div>
 				
 		</div>
