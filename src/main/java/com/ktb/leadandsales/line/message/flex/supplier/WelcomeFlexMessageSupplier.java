@@ -5,137 +5,136 @@ import static java.util.Arrays.asList;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+import com.linecorp.bot.model.action.URIAction;
 import com.linecorp.bot.model.message.FlexMessage;
 import com.linecorp.bot.model.message.flex.component.Box;
+import com.linecorp.bot.model.message.flex.component.Button;
 import com.linecorp.bot.model.message.flex.component.Icon;
+import com.linecorp.bot.model.message.flex.component.Image;
+import com.linecorp.bot.model.message.flex.component.Separator;
 import com.linecorp.bot.model.message.flex.component.Text;
 import com.linecorp.bot.model.message.flex.container.Bubble;
 import com.linecorp.bot.model.message.flex.unit.FlexFontSize;
+import com.linecorp.bot.model.message.flex.unit.FlexGravity;
 import com.linecorp.bot.model.message.flex.unit.FlexLayout;
 import com.linecorp.bot.model.message.flex.unit.FlexMarginSize;
 
 public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     @Override
     public FlexMessage get() {
-        final Box heroBlock = createHeroBlock();
+        final Box headerBlock = createHeaderBlock();
+        final Image heroBlock = createHeroBlock();
         final Box bodyBlock = createBodyBlock();
-
-        final Bubble bubbleContainer = Bubble.builder()
+        final Box footerBlock =  createFooterBlock();
+        final Bubble bubble = Bubble.builder()
+                .header(headerBlock)
                 .hero(heroBlock)
                 .body(bodyBlock)
+                .footer(footerBlock)
                 .build();
-        return new FlexMessage("Welcome to RM Alert", bubbleContainer);
+        return new FlexMessage("Welcome to RM Alert", bubble);
     }
 
-    private Box createHeroBlock() {
-        final Text bodyHeaderText = Text.builder()
-                .text("RECEIPT")
-                .weight(Text.TextWeight.BOLD)
-                .color("#1db446")
-                .size(FlexFontSize.SM)
-                .build();
-        final Text bodyTitleHeaderText = Text.builder()
-                .text("ข้าวเฮียตุ๋น")
-                .weight(Text.TextWeight.BOLD)
-                .size(FlexFontSize.XXL)
-                .margin(FlexMarginSize.MD)
-                .build();
-        final Text bodyTitleHeaderDetail = Text.builder()
-                .text("Silom, Bangkok")
-                .size(FlexFontSize.XS)
-                .color("#aaaaaa")
-                .wrap(true)
-                .build();
-
+    private Box createHeaderBlock() {
         return Box.builder()
-                .layout(FlexLayout.VERTICAL)
-                .contents(Arrays.asList(
-                        bodyHeaderText,
-                        bodyTitleHeaderText,
-                        bodyTitleHeaderDetail))
+                .layout(FlexLayout.HORIZONTAL)
+                .contents(asList(
+                        Text.builder()
+                                .text("RM ALERT")
+                                .weight(Text.TextWeight.BOLD)
+                                .color("#aaaaaa")
+                                .size(FlexFontSize.SM).build()
+                )).build();
+    }
+
+    private Image createHeroBlock() {
+        return Image.builder()
+                .url("https://2553d2b9.ngrok.io/img/news.png")
+                .size(Image.ImageSize.FULL_WIDTH)
+                .aspectRatio(Image.ImageAspectRatio.R20TO13)
+                .aspectMode(Image.ImageAspectMode.Cover)
                 .build();
     }
 
     private Box createBodyBlock() {
-        final Text title = Text.builder()
-                .text("Brown Cafe")
-                .weight(Text.TextWeight.BOLD)
-                .size(FlexFontSize.XL)
+        final Box imageBlock = createThumbnailsBox();
+        final Box heightLightBlock = createNewsBlock();
+        return Box.builder()
+                .layout(FlexLayout.HORIZONTAL)
+                .spacing(FlexMarginSize.MD)
+                .contents(asList(imageBlock, heightLightBlock))
                 .build();
-        final Box review = createReviewBox();
-        final Box info = createInfoBox();
+    }
+    
+    private Box createThumbnailsBox() {
+        final Image imagesContent1 = Image.builder()
+                .url("https://2553d2b9.ngrok.io/img/thumbnail1.png")
+                .aspectMode(Image.ImageAspectMode.Cover)
+                .aspectRatio(Image.ImageAspectRatio.R4TO3)
+                .size(Image.ImageSize.SM)
+                .gravity(FlexGravity.BOTTOM)
+                .build();
+        final Image imagesContent2 = Image.builder()
+                .url("https://2553d2b9.ngrok.io/img/thumbnail2.png")
+                .aspectMode(Image.ImageAspectMode.Cover)
+                .aspectRatio(Image.ImageAspectRatio.R4TO3)
+                .size(Image.ImageSize.SM)
+                .margin(FlexMarginSize.MD)
+                .build();
 
         return Box.builder()
                 .layout(FlexLayout.VERTICAL)
-                .contents(asList(title, review, info))
+                .flex(1)
+                .contents(asList(imagesContent1, imagesContent2))
                 .build();
     }
 
-    private Box createInfoBox() {
-        final Box place = Box.builder()
-                .layout(FlexLayout.BASELINE)
-                .spacing(FlexMarginSize.SM)
-                .contents(asList(
-                        Text.builder()
-                            .text("Place")
-                            .color("#aaaaaa")
-                            .size(FlexFontSize.SM)
-                            .flex(1)
-                            .build(),
-                        Text.builder()
-                            .text("Silom, Bangkok")
-                            .wrap(true)
-                            .color("#666666")
-                            .flex(5)
-                            .build()
-                )).build();
-        final Box time = Box.builder()
-                .layout(FlexLayout.BASELINE)
-                .spacing(FlexMarginSize.SM)
-                .contents(asList(
-                        Text.builder().text("Time")
-                            .color("#aaaaaa")
-                            .size(FlexFontSize.SM)
-                            .flex(1)
-                            .build(),
-                        Text.builder()
-                            .text("10:00 - 23:00")
-                            .wrap(true)
-                            .color("#666666")
-                            .size(FlexFontSize.SM)
-                            .flex(5)
-                            .build()
-                )).build();
+    private Box createNewsBlock() {
+        final Separator separator = Separator.builder().build();
+
         return Box.builder()
                 .layout(FlexLayout.VERTICAL)
-                .margin(FlexMarginSize.LG)
-                .spacing(FlexMarginSize.SM)
-                .contents(asList(place, time))
+                .flex(2)
+                .contents(asList(
+                        Text.builder()
+                                .text("7 Things to Know for Today")
+                                .gravity(FlexGravity.TOP)
+                                .size(FlexFontSize.XS)
+                                .flex(1)
+                                .build(),
+                        separator,
+                        Text.builder()
+                                .text("Hay fever goes wild")
+                                .gravity(FlexGravity.CENTER)
+                                .size(FlexFontSize.XS)
+                                .flex(2)
+                                .build(),
+                        separator,
+                        Text.builder()
+                                .text("LINE Pay Begins Barcode Payment Service")
+                                .gravity(FlexGravity.CENTER)
+                                .size(FlexFontSize.XS)
+                                .flex(2)
+                                .build(),
+                        separator,
+                        Text.builder()
+                                .text("LINE Adds LINE Wallet")
+                                .gravity(FlexGravity.BOTTOM)
+                                .size(FlexFontSize.XS)
+                                .flex(1)
+                                .build()
+                ))
                 .build();
     }
 
-    private Box createReviewBox() {
-        final Icon goldStar = Icon.builder()
-                .size(FlexFontSize.SM)
-                .url("https://raw.githubusercontent.com/iphayao/line-bot-spring-boot-flex/master/src/main/resources/img/gold_star.png")
-                .build();
-        final Icon grayStar = Icon.builder()
-                .size(FlexFontSize.SM)
-                .url("https://raw.githubusercontent.com/iphayao/line-bot-spring-boot-flex/master/src/main/resources/img/gray_star.png")
-                .build();
-        final Text point = Text.builder()
-                .text("4.0")
-                .size(FlexFontSize.SM)
-                .color("#999999")
-                .margin(FlexMarginSize.MD)
-                .flex(0)
-                .build();
-
+    private Box createFooterBlock() {
         return Box.builder()
-                .layout(FlexLayout.BASELINE)
-                .margin(FlexMarginSize.MD)
-                .contents(asList(goldStar, goldStar, goldStar, goldStar, grayStar, point))
-                .build();
+                .layout(FlexLayout.HORIZONTAL)
+                .contents(asList(
+                        Button.builder()
+                                .action(new URIAction("more", "https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid", null))
+                                .build()
+                )).build();
     }
 
 }
