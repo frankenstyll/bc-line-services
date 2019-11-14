@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ktb.leadandsales.line.bot.controller.LineBotController;
 import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.model.MessageBean;
+//import com.ktb.leadandsales.model.MessageBean;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.message.TextMessage;

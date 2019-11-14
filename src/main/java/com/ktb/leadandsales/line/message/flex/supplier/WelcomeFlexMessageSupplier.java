@@ -24,7 +24,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 .hero(heroBlock)
                 .body(bodyBlock)
                 .build();
-        return new FlexMessage("Restaurant", bubbleContainer);
+        return new FlexMessage("Welcome to RM Alert", bubbleContainer);
     }
 
     private Box createHeroBlock() {
