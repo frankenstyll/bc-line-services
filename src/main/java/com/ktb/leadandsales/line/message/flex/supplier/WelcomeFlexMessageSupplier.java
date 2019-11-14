@@ -3,14 +3,14 @@ package com.ktb.leadandsales.line.message.flex.supplier;
 import static java.util.Arrays.asList;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.function.Supplier;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.linecorp.bot.model.action.URIAction;
 import com.linecorp.bot.model.message.FlexMessage;
 import com.linecorp.bot.model.message.flex.component.Box;
 import com.linecorp.bot.model.message.flex.component.Button;
-import com.linecorp.bot.model.message.flex.component.Icon;
 import com.linecorp.bot.model.message.flex.component.Image;
 import com.linecorp.bot.model.message.flex.component.Separator;
 import com.linecorp.bot.model.message.flex.component.Text;
@@ -21,6 +21,7 @@ import com.linecorp.bot.model.message.flex.unit.FlexLayout;
 import com.linecorp.bot.model.message.flex.unit.FlexMarginSize;
 
 public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
+	
     @Override
     public FlexMessage get() {
         final Box headerBlock = createHeaderBlock();
@@ -49,8 +50,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
 
     private Image createHeroBlock() {
-        URI uriImage = URI.create("https://2553d2b9.ngrok.io/img/news.png");
-        URI uriExample = URI.create("http://www.iamnavanit.com");
+        URI uriImage = URI.create("/images/logo1.jpg");
         return Image.builder()
                 .url(uriImage)
                 .size(Image.ImageSize.FULL_WIDTH)
