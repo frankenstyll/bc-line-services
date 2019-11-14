@@ -2,6 +2,7 @@ package com.ktb.leadandsales.line.message.flex.supplier;
 
 import static java.util.Arrays.asList;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
@@ -48,8 +49,10 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
 
     private Image createHeroBlock() {
+        URI uriImage = URI.create("https://2553d2b9.ngrok.io/img/news.png");
+        URI uriExample = URI.create("http://www.iamnavanit.com");
         return Image.builder()
-                .url("https://2553d2b9.ngrok.io/img/news.png")
+                .url(uriImage)
                 .size(Image.ImageSize.FULL_WIDTH)
                 .aspectRatio(Image.ImageAspectRatio.R20TO13)
                 .aspectMode(Image.ImageAspectMode.Cover)
@@ -67,15 +70,19 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
     
     private Box createThumbnailsBox() {
+        URI uriImage = URI.create("https://2553d2b9.ngrok.io/img/thumbnail1.png");
+        URI uriImage2 = URI.create("https://2553d2b9.ngrok.io/img/thumbnail2.png");
+        URI uriExample = URI.create("http://www.iamnavanit.com");
+        
         final Image imagesContent1 = Image.builder()
-                .url("https://2553d2b9.ngrok.io/img/thumbnail1.png")
+                .url(uriImage)
                 .aspectMode(Image.ImageAspectMode.Cover)
                 .aspectRatio(Image.ImageAspectRatio.R4TO3)
                 .size(Image.ImageSize.SM)
                 .gravity(FlexGravity.BOTTOM)
                 .build();
         final Image imagesContent2 = Image.builder()
-                .url("https://2553d2b9.ngrok.io/img/thumbnail2.png")
+                .url(uriImage2)
                 .aspectMode(Image.ImageAspectMode.Cover)
                 .aspectRatio(Image.ImageAspectRatio.R4TO3)
                 .size(Image.ImageSize.SM)
@@ -128,11 +135,12 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
 
     private Box createFooterBlock() {
+        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid");
         return Box.builder()
                 .layout(FlexLayout.HORIZONTAL)
                 .contents(asList(
                         Button.builder()
-                                .action(new URIAction("more", "https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid", null))
+                                .action(new URIAction("Click", uriIRegister, null))
                                 .build()
                 )).build();
     }
