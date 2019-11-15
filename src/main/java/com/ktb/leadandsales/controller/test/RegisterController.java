@@ -6,7 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 @Controller
 public class RegisterController {
@@ -25,4 +29,14 @@ public class RegisterController {
 		return "bc-line-empid";
 	}
 	
+	@PostMapping("/bcbot/register")
+	public String register(HttpServletRequest request) {
+		log.info("[START]register");
+		Gson gson = new Gson();    
+		
+		log.info("[USER_ID]" + request.getParameter("register"));
+		
+		log.info("[END]register");
+		return "bc-line-empid";
+	}
 }

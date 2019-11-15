@@ -19,7 +19,7 @@
 		</style>
 	</head>	
 	<body>
-		<form id="registerForm">
+		<form id="registerForm" action="/bcbot/register">
 		<div class="container">  
 			<div class="row">
 				<div class="col-sm-12"><br/> </div>
@@ -47,7 +47,7 @@
 			
 			<div class="row">
 				<div class="col-sm-3"></div>
-				<div class="col-sm-6" style="text-align: center">
+				<div class="col-sm-6">
 				 <label for="empId"> E-MAIL </label>
 				</div>
 				<div class="col-sm-3"></div>
@@ -94,10 +94,12 @@
 		$( document ).ready(function() {
 	    	$('#message').text('กรุณาระบุรหัสพนักงาน');
 
+	    	document.getElementById("empId").focus();
 	    	initPage();
 	    	
 	    	function initPage(){
 	    		//$("#registerForm #empId").focus();
+	    		//document.getElementById("empId").focus();
 	    	}
 	    	
 		});
