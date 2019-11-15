@@ -28,12 +28,12 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     public FlexMessage get() {
         final Box headerBlock = createHeaderBlock();
         final Box heroBlock = createHeroBlock();
-        final Box bodyBlock = createBodyBlock();
+       // final Box bodyBlock = createBodyBlock();
         final Box footerBlock =  createFooterBlock();
         final Bubble bubble = Bubble.builder()
                 .header(headerBlock)
                 .hero(heroBlock)
-                .body(bodyBlock)
+                //.body(bodyBlock)
                 .footer(footerBlock)
                 .build();
         return new FlexMessage("Welcome to RM Alert", bubble);
@@ -57,7 +57,9 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 .flex(2)
                 .contents(asList(
                         Text.builder()
-                                .text("7 Things to Know for Today")
+                                .text("   DEMO RM ALERT  กรุณาสมัครสมาชิกเพื่อรับข้อมูล  "
+                                	)
+                                .weight(Text.TextWeight.BOLD)
                                 .gravity(FlexGravity.TOP)
                                 .size(FlexFontSize.XS)
                                 .color("#0066FF")
@@ -66,6 +68,20 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 ))
                 .build();
     }
+    
+    private Box createFooterBlock() {
+        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid?register=" + this.userId);
+        return Box.builder()
+                .layout(FlexLayout.HORIZONTAL)
+                .contents(asList(
+                        Button.builder()
+                                .action(new URIAction("สมัครรับสมาชิกรับข้อมูล"
+                                		,uriIRegister, null))
+                                .build()
+                )).build();
+    }
+
+    
     /*
     private Image createHeroBlock() {
         URI uriImage = URI.create("/images/logo1.jpg");
@@ -153,21 +169,10 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 .build();
     }
 
-    private Box createFooterBlock() {
-        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid?register=" + this.userId);
-        return Box.builder()
-                .layout(FlexLayout.HORIZONTAL)
-                .contents(asList(
-                        Button.builder()
-                                .action(new URIAction("Click", uriIRegister, null))
-                                .build()
-                )).build();
-    }
 
 	public String getUserId() {
 		return userId;
 	}
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}

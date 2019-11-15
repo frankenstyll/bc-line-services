@@ -28,59 +28,59 @@
 				<div class="col-sm-12"><br/> </div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4" style="text-align: center">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
 				 <label for="empId"> 	กรุณาระบุรหัสพนักงาน </label>
 				</div>
-				<div class="col-sm-4"></div>
+				<div class="col-sm-3"></div>
 			</div>
 			
 			<div class="row">
-			  	<div class="col-sm-4"></div>
-				<div class="col-xs-4 col-sm-4 col-md-4">
+			  	<div class="col-sm-3"></div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
 				  	<div class="form-group">
-					  	<input type="text" class="form-control" id="empId" ></input>
+					  	<input type="text" class="form-control" id="empId" autofocus ></input>
 				  	</div>
 			  	</div>
-			  	<div class="col-sm-4"></div>
+			  	<div class="col-sm-3"></div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4" style="text-align: center">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="text-align: center">
 				 <label for="empId"> E-MAIL </label>
 				</div>
-				<div class="col-sm-4"></div>
+				<div class="col-sm-3"></div>
 			</div>
 			<div class="row">
-			  	<div class="col-sm-4"></div>
-				<div class="col-xs-4 col-sm-4 col-md-4">
+			  	<div class="col-sm-3"></div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
 				  	<div class="form-group">
 					  	<input type="text" class="form-control" id="emailId" ></input>
 				  	</div>
 			  	</div>
-			  	<div class="col-sm-4"></div>
+			  	<div class="col-sm-3"></div>
 			</div>
 			
 			<div class="row">
-			  	<div class="col-sm-4"></div>
-				<div class="col-xs-4 col-sm-4 col-md-4">
+			  	<div class="col-sm-3"></div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
 				  	<div class="form-group">
 					  	${register}
 				  	</div>
 			  	</div>
-			  	<div class="col-sm-4"></div>
+			  	<div class="col-sm-3"></div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4" style="text-align: center;">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="text-align: center;">
 					<div class="form-group">
 						<button type="button" class="btn btn-success">Register</button>
 						<button type="button" class="btn btn-default">Clear</button>
 					</div>
 				</div>
-				<div class="col-sm-4"></div>
+				<div class="col-sm-3"></div>
 			</div>
 				
 		</div>
@@ -97,11 +97,10 @@
 	    	initPage();
 	    	
 	    	function initPage(){
-	    		$("#registerForm #empId").focus();
+	    		//$("#registerForm #empId").focus();
 	    	}
 	    	
 		});
-		
 		
 	</script>
 </html>
