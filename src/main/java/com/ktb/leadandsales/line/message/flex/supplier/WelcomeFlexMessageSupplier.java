@@ -22,10 +22,12 @@ import com.linecorp.bot.model.message.flex.unit.FlexMarginSize;
 
 public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
 	
+	private String userId = "";
+	
     @Override
     public FlexMessage get() {
         final Box headerBlock = createHeaderBlock();
-        final Image heroBlock = createHeroBlock();
+        final Box heroBlock = createHeroBlock();
         final Box bodyBlock = createBodyBlock();
         final Box footerBlock =  createFooterBlock();
         final Bubble bubble = Bubble.builder()
@@ -48,7 +50,23 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                                 .size(FlexFontSize.SM).build()
                 )).build();
     }
-
+    
+    private Box createHeroBlock() {
+    	return Box.builder()
+                .layout(FlexLayout.VERTICAL)
+                .flex(2)
+                .contents(asList(
+                        Text.builder()
+                                .text("7 Things to Know for Today")
+                                .gravity(FlexGravity.TOP)
+                                .size(FlexFontSize.XS)
+                                .color("#0066FF")
+                                .flex(1)
+                                .build()
+                ))
+                .build();
+    }
+    /*
     private Image createHeroBlock() {
         URI uriImage = URI.create("/images/logo1.jpg");
         return Image.builder()
@@ -57,15 +75,16 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 .aspectRatio(Image.ImageAspectRatio.R20TO13)
                 .aspectMode(Image.ImageAspectMode.Cover)
                 .build();
-    }
+    }*/
 
     private Box createBodyBlock() {
-        final Box imageBlock = createThumbnailsBox();
+        //final Box imageBlock = createThumbnailsBox();
         final Box heightLightBlock = createNewsBlock();
         return Box.builder()
                 .layout(FlexLayout.HORIZONTAL)
                 .spacing(FlexMarginSize.MD)
-                .contents(asList(imageBlock, heightLightBlock))
+//                .contents(asList(imageBlock, heightLightBlock))
+                .contents(asList(heightLightBlock))
                 .build();
     }
     
@@ -135,7 +154,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
 
     private Box createFooterBlock() {
-        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid");
+        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid?register=" + this.userId);
         return Box.builder()
                 .layout(FlexLayout.HORIZONTAL)
                 .contents(asList(
@@ -144,5 +163,14 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                                 .build()
                 )).build();
     }
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 
 }

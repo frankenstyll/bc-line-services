@@ -19,7 +19,7 @@
 		</style>
 	</head>	
 	<body>
-	
+		<form id="registerForm">
 		<div class="container">  
 			<div class="row">
 				<div class="col-sm-12"><br/> </div>
@@ -39,7 +39,34 @@
 			  	<div class="col-sm-4"></div>
 				<div class="col-xs-4 col-sm-4 col-md-4">
 				  	<div class="form-group">
-					  	<input type="text" class="form-control" id="empId"></input>
+					  	<input type="text" class="form-control" id="empId" ></input>
+				  	</div>
+			  	</div>
+			  	<div class="col-sm-4"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4" style="text-align: center">
+				 <label for="empId"> E-MAIL </label>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+			  	<div class="col-sm-4"></div>
+				<div class="col-xs-4 col-sm-4 col-md-4">
+				  	<div class="form-group">
+					  	<input type="text" class="form-control" id="emailId" ></input>
+				  	</div>
+			  	</div>
+			  	<div class="col-sm-4"></div>
+			</div>
+			
+			<div class="row">
+			  	<div class="col-sm-4"></div>
+				<div class="col-xs-4 col-sm-4 col-md-4">
+				  	<div class="form-group">
+					  	${register}
 				  	</div>
 			  	</div>
 			  	<div class="col-sm-4"></div>
@@ -49,15 +76,15 @@
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4" style="text-align: center;">
 					<div class="form-group">
-						<button type="submit" class="btn btn-success">Register</button>
-						<button type="submit" class="btn btn-default">Clear</button>
+						<button type="button" class="btn btn-success">Register</button>
+						<button type="button" class="btn btn-default">Clear</button>
 					</div>
 				</div>
 				<div class="col-sm-4"></div>
 			</div>
 				
 		</div>
-		
+		</form>
 	</body>
 <!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
 	<script src="https://d.line-scdn.net/liff/1.0/sdk.js" /></script>
@@ -66,8 +93,16 @@
 	
 		$( document ).ready(function() {
 	    	$('#message').text('กรุณาระบุรหัสพนักงาน');
+
+	    	initPage();
+	    	
+	    	function initPage(){
+	    		$("#registerForm #empId").focus();
+	    	}
 	    	
 		});
+		
+		
 	</script>
 </html>
 

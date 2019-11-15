@@ -53,8 +53,9 @@ public class LineBotController {
     
     @EventMapping
 	public void handleTextMessage(MessageEvent<TextMessageContent> e) {
-    	
-    	 this.reply(e.getReplyToken(), new WelcomeFlexMessageSupplier().get());
+    	WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
+    	welcome.setUserId(e.getSource().getUserId());
+    	this.reply(e.getReplyToken(), welcome.get());
     }
     /**for test*/
     private void replyText(@NonNull String replyToken, @NonNull String message) {
