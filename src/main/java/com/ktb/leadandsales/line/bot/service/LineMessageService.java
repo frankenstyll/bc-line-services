@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ktb.leadandsales.line.engine.service.TextContentService;
 import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.message.AudioMessageContent;
 import com.linecorp.bot.model.event.message.ImageMessageContent;
@@ -22,9 +21,6 @@ import com.linecorp.bot.model.message.TextMessage;
 public class LineMessageService {
     @Autowired
     LineBotService service;
-
-    @Autowired
-    TextContentService textContentService;
 
     public void handleStickerContent(String replyToken, Event event,
                                      StickerMessageContent stickerMessageContent) {
@@ -59,11 +55,6 @@ public class LineMessageService {
     public void handleAudioContent(String replyToken, Event event,
                                    AudioMessageContent audioMessageContent) {
 //        service.reply(replyToken, new TextMessage("ยังไม่รอบรับ audio ตอนนี้"));
-    }
-
-    public void handleTextContent(String replyToken, Event event,
-                                   String text) {
-        textContentService.reply(replyToken, text);
     }
 
     public void handlePushTextContent(String userId , List<Message> messages) {

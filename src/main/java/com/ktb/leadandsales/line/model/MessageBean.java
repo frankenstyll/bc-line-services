@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.model;
+package com.ktb.leadandsales.line.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.controller;
+package com.ktb.leadandsales.mvc.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktb.leadandsales.model.RegisterModel;
+import com.ktb.leadandsales.mvc.model.RegisterModel;
 
 @Controller
 @RequestMapping("/register")

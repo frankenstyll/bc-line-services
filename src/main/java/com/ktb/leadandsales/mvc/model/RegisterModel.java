@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.model;
+package com.ktb.leadandsales.mvc.model;
 
 import lombok.Data;
 

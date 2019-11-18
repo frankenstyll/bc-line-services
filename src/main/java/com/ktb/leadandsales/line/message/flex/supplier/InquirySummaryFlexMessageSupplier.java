@@ -1,26 +1,21 @@
 package com.ktb.leadandsales.line.message.flex.supplier;
 
-import com.ktb.leadandsales.line.message.flex.component.builder.model.*;
-import com.ktb.leadandsales.line.message.flex.component.builder.service.implement.*;
-import com.linecorp.bot.model.action.URIAction;
-import com.linecorp.bot.model.message.FlexMessage;
-import com.linecorp.bot.model.message.flex.component.*;
-import com.linecorp.bot.model.message.flex.container.Bubble;
-import com.linecorp.bot.model.message.flex.unit.FlexFontSize;
-import com.linecorp.bot.model.message.flex.unit.FlexLayout;
-import com.linecorp.bot.model.message.flex.unit.FlexMarginSize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.net.URI;
-import java.util.List;
 import java.util.function.Supplier;
 
-import static java.util.Arrays.asList;
+import org.springframework.stereotype.Service;
+
+import com.linecorp.bot.model.message.FlexMessage;
 
 @Service
 public class InquirySummaryFlexMessageSupplier implements Supplier<FlexMessage> {
 
+	@Override
+	public FlexMessage get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
     @Autowired
     BoxBuilderService boxBuilderService;
 
@@ -147,5 +142,6 @@ public class InquirySummaryFlexMessageSupplier implements Supplier<FlexMessage> 
                 new BoxBuilderDto(FlexLayout.BASELINE, FlexMarginSize.MD, contents)
         );
     }
+    */
 
 }

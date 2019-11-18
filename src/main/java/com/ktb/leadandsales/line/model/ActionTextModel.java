@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.line.engine.model;
+package com.ktb.leadandsales.line.model;
 
 import lombok.Data;
 
