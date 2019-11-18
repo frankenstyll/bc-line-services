@@ -13,6 +13,7 @@ import com.linecorp.bot.model.event.message.ImageMessageContent;
 import com.linecorp.bot.model.event.message.LocationMessageContent;
 import com.linecorp.bot.model.event.message.StickerMessageContent;
 import com.linecorp.bot.model.event.message.VideoMessageContent;
+import com.linecorp.bot.model.message.FlexMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TextMessage;
@@ -57,6 +58,10 @@ public class LineMessageService {
 //        service.reply(replyToken, new TextMessage("ยังไม่รอบรับ audio ตอนนี้"));
     }
 
+    public void handleFlexMessageContent(String replyToken, FlexMessage messages) {
+    	service.reply(replyToken, messages);
+    }
+    
     public void handlePushTextContent(String userId , List<Message> messages) {
     	service.push(userId, messages);
     }

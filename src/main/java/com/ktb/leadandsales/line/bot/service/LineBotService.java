@@ -32,5 +32,4 @@ public class LineBotService extends LineActionService {
     public void broadcast(@NonNull String userId, @NonNull List<Message> messages) {
     	actionMessage(LineConstant.ACTION_BROADCAST, userId, messages);
     }
-
 }
