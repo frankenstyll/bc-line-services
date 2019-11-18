@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.controller.test;
+package com.ktb.leadandsales.controller;
 
 import java.net.URL;
 

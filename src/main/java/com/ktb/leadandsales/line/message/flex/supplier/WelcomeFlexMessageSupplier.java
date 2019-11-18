@@ -70,7 +70,8 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
     
     private Box createFooterBlock() {
-        URI uriIRegister = URI.create("https://glacial-peak-48383.herokuapp.com/bcbot/bc-line-empid?register=" + this.userId);
+        URI uriIRegister = URI.create(
+        		"https://glacial-peak-48383.herokuapp.com/register/bc-line-empid?register=" + this.userId);
         return Box.builder()
                 .layout(FlexLayout.HORIZONTAL)
                 .contents(asList(

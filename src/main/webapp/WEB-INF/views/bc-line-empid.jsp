@@ -14,12 +14,12 @@
 		
 		<style type="text/css">
 			.container { 
-				width: 80% !important;
+/* 				width: 80% !important; */
 			}
 		</style>
 	</head>	
 	<body>
-		<form id="registerForm" action="/bcbot/register">
+		<form id="registerForm" action="/register/register">
 		<div class="container">  
 			<div class="row">
 				<div class="col-sm-12"><br/> </div>
@@ -145,7 +145,7 @@
     		}
     		$.ajax({
     			  type: "POST",
-    			  url: "/bcbot/register",
+    			  url: "/register/register",
     			  data: dataObj,
     			  success: function(response){
     				 console.log(response);

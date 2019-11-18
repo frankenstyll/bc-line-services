@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.controller.test;
+package com.ktb.leadandsales.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.ktb.leadandsales.model.RegisterModel;
 
 @Controller
+@RequestMapping("/register")
 public class RegisterController {
 
 	private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
 	
-	@RequestMapping("/bcbot/bc-line-empid")
+	@RequestMapping("/bc-line-empid")
 	public String getEmpLineId(HttpServletRequest request,ModelMap model) {
 		log.info("[START]getEmpLineId");
 		
@@ -34,7 +34,7 @@ public class RegisterController {
 		return "bc-line-empid";
 	}
 	
-	@PostMapping("/bcbot/register")
+	@PostMapping("/register")
 	@ResponseBody
 	public Map<String,Object> register(@ModelAttribute RegisterModel register) {
 		log.info("[START]register");
