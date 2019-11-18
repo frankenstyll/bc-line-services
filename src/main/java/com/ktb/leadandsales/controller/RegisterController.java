@@ -43,11 +43,34 @@ public class RegisterController {
 		log.info("[EMP_EMAIL]" + register.getEmail());
 		log.info("[EMP_ID]" + register.getEmployeeId());
 		
+		//response message and send otp ref number back
+		Map<String,Object> resp = new HashMap<String, Object>();
+		resp.put("status", "success");
+		resp.put("otpNumber","xxxxxxxxxxx"); //TODO wait for call service get otp 
+		resp.put("otpRefNumber","YYYYYYYYYY");
+		
+		log.info("[END]register");
+		return resp;
+	}
+	
+	@PostMapping("/confirmOTP")
+	@ResponseBody
+	public Map<String,Object> confirmOTP(@ModelAttribute RegisterModel register) {
+		log.info("[START]confirmOTP");
+		
+		log.info("[USER_ID]" + register.getUserId());
+		log.info("[EMP_EMAIL]" + register.getEmail());
+		log.info("[EMP_ID]" + register.getEmployeeId());
+		
+		log.info("[OTP]" + register.getOtpNumber());
+		
+		//TODO call service check otp
+		
 		//response message
 		Map<String,Object> resp = new HashMap<String, Object>();
 		resp.put("status", "success");
 		
-		log.info("[END]register");
+		log.info("[END]confirmOTP");
 		return resp;
 	}
 }

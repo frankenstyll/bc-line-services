@@ -46,23 +46,6 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-				 <label for="empId"> E-MAIL </label>
-				</div>
-				<div class="col-sm-3"></div>
-			</div>
-			<div class="row">
-			  	<div class="col-sm-3"></div>
-				<div class="col-xs-6 col-sm-6 col-md-6">
-				  	<div class="form-group">
-					  	<input type="text" class="form-control" id="emailId" ></input>
-				  	</div>
-			  	</div>
-			  	<div class="col-sm-3"></div>
-			</div>
-			
-			<div class="row">
 			  	<div class="col-sm-3"></div>
 				<div class="col-xs-6 col-sm-6 col-md-6">
 				  	<div class="form-group">
@@ -134,14 +117,31 @@
 		});
 		
 		function confirmOTP() {
-			alert("confirm otp for register");
+			console.log("confirm otp for register : " + "${register}");
+			var dataObj = {
+    				"userId" : "${register}",
+    				"employeeId" : $("#registerForm #empId").val(),
+    				"otpNumber" : $("#registerForm #otpNumber").val()
+    		}
+    		$.ajax({
+    			  type: "POST",
+    			  url: "/register/confirmOTP",
+    			  data: dataObj,
+    			  success: function(response){
+    				 console.log(response);
+    				 if("success" == response.status){
+    					 window.close();						 
+    				 }else {
+    					 alert("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
+    				 }	  
+    			  }
+    		});
 		}
 		
 		function register(){
     		var dataObj = {
     				"userId" : "${register}",
-    				"employeeId" : $("#registerForm #empId").val(),
-    				"email" : $("#registerForm #emailId").val()		
+    				"employeeId" : $("#registerForm #empId").val()
     		}
     		$.ajax({
     			  type: "POST",
