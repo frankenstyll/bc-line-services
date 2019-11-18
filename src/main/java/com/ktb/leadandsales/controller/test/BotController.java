@@ -1,12 +1,12 @@
 package com.ktb.leadandsales.controller.test;
 
-import lombok.extern.slf4j.Slf4j;
+import java.net.URL;
 
 //@ComponentScan(basePackages = "com.example")
 
 //@LineMessageHandler
 public class BotController {
-
+	
 //	@Autowired
 //	private LineMessagingClient lineMessagingClient;
 //

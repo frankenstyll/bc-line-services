@@ -9,7 +9,7 @@
 <!-- 		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 		
 		<link rel="stylesheet" href="../style/css/bootstrap.min.css">
-		<script	src="../script/jquery-3.4.1.min.js"></script>
+		<script	src="../jquery/jquery-3.4.1.min.js"></script>
 		<script	src="../style/js/bootstrap.min.js"></script>
 		
 		<style type="text/css">
@@ -76,8 +76,36 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6" style="text-align: center;">
 					<div class="form-group">
-						<button type="button" class="btn btn-success">Register</button>
-						<button type="button" class="btn btn-default">Clear</button>
+						<button type="button" class="btn btn-success" onclick="register()" id="registerButton">Register</button>
+						<button type="button" class="btn btn-default" id="clearButton">Clear</button>
+					</div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+				 <label for="otpNumber" id="otpNumberLabel" style="display: none;">OTP Number</label>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="text-align: center;">
+					<div class="form-group">
+						<input type="text" class="form-control" id="otpNumber" style="display: none;"></input>
+					</div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="text-align: center;">
+					<div class="form-group">
+						<button type="button" class="btn btn-success" style="display: none;"
+							onclick="confirmOTP()" id="confirmOTPButton">ยืนยัน</button>
 					</div>
 				</div>
 				<div class="col-sm-3"></div>
@@ -102,7 +130,43 @@
 	    		//document.getElementById("empId").focus();
 	    	}
 	    	
+	    	
 		});
+		
+		function confirmOTP() {
+			alert("confirm otp for register");
+		}
+		
+		function register(){
+    		var dataObj = {
+    				"userId" : "${register}",
+    				"employeeId" : $("#registerForm #empId").val(),
+    				"email" : $("#registerForm #emailId").val()		
+    		}
+    		$.ajax({
+    			  type: "POST",
+    			  url: "/bcbot/register",
+    			  data: dataObj,
+    			  success: function(response){
+    				 console.log(response);
+    				 if("success" == response.status){
+    					 
+    					 alert("ส่งรหัส OTP ไปยัง EMAIL ของท่านแล้ว");
+    					 
+    					 $("#registerForm #registerButton").hide();
+    					 $("#registerForm #clearButton").hide();
+    					 
+    					 $("#registerForm #otpNumberLabel").show();
+						 $("#registerForm #otpNumber").show();
+							
+						 $("#confirmOTPButton").show();
+						 
+    				 }else {
+    					 alert("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
+    				 }	  
+    			  }
+    		});
+    	}
 		
 	</script>
 </html>

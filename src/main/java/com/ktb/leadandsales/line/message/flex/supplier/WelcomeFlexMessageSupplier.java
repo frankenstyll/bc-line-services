@@ -57,7 +57,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
                 .flex(2)
                 .contents(asList(
                         Text.builder()
-                                .text("   DEMO RM ALERT  กรุณาสมัครสมาชิกเพื่อรับข้อมูล  "
+                                .text(" DEMO RM ALERT "
                                 	)
                                 .weight(Text.TextWeight.BOLD)
                                 .gravity(FlexGravity.TOP)
