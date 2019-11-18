@@ -43,7 +43,13 @@ public class RegisterController {
 		log.info("[EMP_EMAIL]" + register.getEmail());
 		log.info("[EMP_ID]" + register.getEmployeeId());
 		
-		//response message and send otp ref number back
+		//TODO JOB
+		//1.generate otp
+		//2.generate ref number
+		//3.send otp number
+		//4.response result
+		
+		
 		Map<String,Object> resp = new HashMap<String, Object>();
 		resp.put("status", "success");
 		resp.put("otpNumber","xxxxxxxxxxx"); //TODO wait for call service get otp 
@@ -64,9 +70,10 @@ public class RegisterController {
 		
 		log.info("[OTP]" + register.getOtpNumber());
 		
-		//TODO call service check otp
+		//TODO Job 
+		//1.call service check otp
+		//2.response result
 		
-		//response message
 		Map<String,Object> resp = new HashMap<String, Object>();
 		resp.put("status", "success");
 		
