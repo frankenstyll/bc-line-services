@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style type="text/css">
 		.width-element{
-			width: 60% !important;
+			width: 61% !important;
 		}
 		.padding-top{
 			padding-top: 20px;
@@ -18,6 +18,7 @@
 		}
 		
 	</style>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>	
 <body>
 	<form id="registerForm" action="/register/register">
@@ -31,7 +32,11 @@
 			</div>
 			
 			<div align="center" class="padding-top">
-				<button type="button" class="btn btn-success" onclick="register()" id="registerButton">Register</button>
+				<div class="g-recaptcha" data-sitekey="6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR"></div>
+			</div>
+			
+			<div align="center" class="padding-top">
+				<button type="button" class="btn btn-success" onclick="register()" id="registerButton">Send OTP</button>
 <!-- 				<button type="button" class="btn btn-default" id="clearButton">Clear</button> -->
 			</div>
 			
@@ -56,10 +61,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script	src="../jquery/jquery-3.4.1.min.js"></script>
-<!-- 		<script	src="../style/js/bootstrap.min.js"></script> -->
 <!-- 		<script src="https://d.line-scdn.net/liff/1.0/sdk.js" /></script> -->
 </body>
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
 <script>
 	$( document ).ready(function() {
     	initPage();
