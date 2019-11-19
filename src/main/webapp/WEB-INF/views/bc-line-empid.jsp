@@ -18,10 +18,10 @@
 		}
 		
 	</style>
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=th" async defer></script>
 </head>	
 <body>
-	<form id="registerForm" action="/register/register">
+	<form id="registerForm" >
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM Register</h5>
@@ -32,11 +32,11 @@
 			</div>
 			
 			<div align="center" class="padding-top">
-				<div class="g-recaptcha" data-sitekey="6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR"></div>
+				<div class="g-recaptcha" data-sitekey="6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR" expired-callback=""></div>
 			</div>
 			
 			<div align="center" class="padding-top">
-				<button type="button" class="btn btn-success" onclick="register()" id="registerButton">Send OTP</button>
+				<button type="button" class="btn btn-success" onclick="validateRegister()" id="registerButton">Send OTP</button>
 <!-- 				<button type="button" class="btn btn-default" id="clearButton">Clear</button> -->
 			</div>
 			
@@ -72,7 +72,12 @@
     		//6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR
     	}
 	});
-		
+	
+	//onload
+ 	var onloadCallback = function() {
+	};
+	  
+	
 	function confirmOTP() {
 		console.log("confirm otp for register : " + "${register}");
 		var dataObj = {
@@ -96,14 +101,17 @@
    		});
 	}
 	
-	function register(){
+	function validateRegister(){
+		
+		var cap = $("[name='g-recaptcha-response']").val();
+		
    		var dataObj = {
    				"userId" : "${register}",
    				"employeeId" : $("#registerForm #empId").val()
    		}
    		$.ajax({
    			  type: "POST",
-   			  url: "/register/register",
+   			  url: "/register/validateRegister",
    			  data: dataObj,
    			  success: function(response){
    				 console.log(response);
@@ -111,7 +119,7 @@
    					 
    					 alert("ส่งรหัส OTP ไปยัง EMAIL ของท่านแล้ว");
    					 
-   					 $("#registerForm #registerButton").hide();
+   					// $("#registerForm #registerButton").hide();
    					 $("#registerForm #empId").attr("readonly","readonly");
    					 
    					 $(".hide-otp").show();

@@ -37,9 +37,9 @@ public class RegisterController {
 		return "bc-line-empid";
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/validateRegister")
 	@ResponseBody
-	public Map<String,Object> register(@ModelAttribute RegisterModel register) {
+	public Map<String,Object> validateRegister(@ModelAttribute RegisterModel register) {
 		log.info("[START]register");
 		
 		log.info("[USER_ID]" + register.getUserId());
