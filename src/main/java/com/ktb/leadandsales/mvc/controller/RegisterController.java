@@ -22,6 +22,9 @@ public class RegisterController {
 
 	private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
 	
+	//captcha secret key 
+	//6LfIgcMUAAAAALPRdNQyVSfPMv0BUZ4R46jy2yZs
+	
 	@RequestMapping("/bc-line-empid")
 	public String getEmpLineId(HttpServletRequest request,ModelMap model) {
 		log.info("[START]getEmpLineId");

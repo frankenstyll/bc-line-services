@@ -65,7 +65,8 @@
     	initPage();
     	
     	function initPage(){
-    		
+    		//captcha sit key
+    		//6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR
     	}
 	});
 		
