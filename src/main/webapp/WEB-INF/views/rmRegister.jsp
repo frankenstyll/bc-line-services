@@ -42,26 +42,25 @@
 			</div>
 			
 			<div align="center" class="padding-top">
-				<button type="button" class="btn btn-success" onclick="validateRegister()" id="registerButton">Send OTP</button>
+				<button type="button" class="btn btn-primary" onclick="validateRegister()" id="registerButton">Send OTP</button>
 <!-- 				<button type="button" class="btn btn-default" id="clearButton">Clear</button> -->
 			</div>
 			
 		</div>
 		
 		<button type="button" class="btn btn-info btn-lg" id="showModal"
-			data-toggle="modal" data-target="#MyPopup" style="display: none"  
+			data-toggle="modal" data-target="#dialogalert" style="display: none"  
 		></button>
 		
-		<div id="MyPopup" class="modal fade bd-example-modal-sm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div id="dialogalert" class="modal fade bd-example-modal-sm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		    <div class="modal-dialog modal-sm">
 		        <div class="modal-content">
 		            <div class="modal-body">
-		            	กรุณาระบุรหัสพนักงานและยืนยันตัวตน
+		            	กรุณาระบุรหัสพนักงานและยืนยันตัวตน Captcha
 		            </div>
 		        </div>
 		    </div>
 		</div>
-		<input type="hidden" name="captcha" id="captcha"/>
 	</form>	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

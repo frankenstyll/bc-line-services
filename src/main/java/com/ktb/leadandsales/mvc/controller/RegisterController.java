@@ -33,9 +33,6 @@ public class RegisterController {
 	private final String reCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
 	private final String secretKey = "6LfIgcMUAAAAALPRdNQyVSfPMv0BUZ4R46jy2yZs";
 	
-	//captcha secret key 
-	//6LfIgcMUAAAAALPRdNQyVSfPMv0BUZ4R46jy2yZs
-	
 	@RequestMapping("/rmregister")
 	public String getEmpLineId(HttpServletRequest request,ModelMap model) {
 		log.info("[START]getEmpLineId");
@@ -95,7 +92,7 @@ public class RegisterController {
 	
 	@PostMapping("/confirmOTP")
 	@ResponseBody
-	public Map<String,Object> confirmOTP(@ModelAttribute RegisterModel register) {
+	public Map<String,Object> confirmOTP(@ModelAttribute RegisterModel register , ModelMap model) {
 		log.info("[START]confirmOTP");
 		
 		log.info("[USER_ID]" + register.getUserId());
@@ -103,15 +100,45 @@ public class RegisterController {
 		log.info("[EMP_ID]" + register.getEmployeeId());
 		
 		log.info("[OTP]" + register.getOtpNumber());
+
+		Map<String,Object> resp = new HashMap<String, Object>();
 		
 		//TODO Job 
 		//1.call service check otp
 		//2.response result
-		
-		Map<String,Object> resp = new HashMap<String, Object>();
-		resp.put("status", "success");
+		try {
+			
+			resp.put("status", "success");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", e.getMessage());
+		}
 		
 		log.info("[END]confirmOTP");
+		return resp;
+	}
+	
+	@PostMapping("/resetOTP")
+	@ResponseBody
+	public Map<String,Object> resetOTP(@ModelAttribute RegisterModel register , ModelMap model) {
+		log.info("[START]resetOTP");
+		
+		Map<String,Object> resp = new HashMap<String, Object>();
+		
+		//TODO Job 
+		//1.call service reset OTP
+		//2.response result
+		try {
+			
+			resp.put("status", "success");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", e.getMessage());
+		}
+		
+		log.info("[END]resetOTP");
 		return resp;
 	}
 }
