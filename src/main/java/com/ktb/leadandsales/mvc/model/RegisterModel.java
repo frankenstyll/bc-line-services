@@ -8,6 +8,7 @@ public class RegisterModel {
 	private String userId;
 	private String email;
 	private String employeeId;
+	private String captcha;
 	
 	private String otpNumber;
 	private String otpRefNumber;

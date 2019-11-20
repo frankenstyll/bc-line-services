@@ -18,34 +18,19 @@
 		}
 		
 	</style>
-	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=th" async defer></script>
 </head>	
 <body>
 	<form id="registerForm" >
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM Register</h5>
-			<p>Please input you employee id</p>
+			<p>Please input OTP</p>
 			
-			<div align="center" >
-				<input type="text" class="form-control width-element" id="empId"></input>
-			</div>
-			
-			<div align="center" class="padding-top">
-				<div class="g-recaptcha" data-sitekey="6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR" expired-callback=""></div>
-			</div>
-			
-			<div align="center" class="padding-top">
-				<button type="button" class="btn btn-success" onclick="validateRegister()" id="registerButton">Send OTP</button>
-<!-- 				<button type="button" class="btn btn-default" id="clearButton">Clear</button> -->
-			</div>
-			
-			<div align="center" class="form-group padding-top hide-otp">
-				 <label for="otpNumber" id="otpNumberLabel">OTP Number(Number 6)</label>
+			<div align="center" class="form-group padding-top">
 				 <input type="text" class="form-control width-element" id="otpNumber" ></input>
 			</div>
 			
-			<div align="center" class="form-group hide-otp">
+			<div align="center" class="form-group">
 				 <button type="button" class="btn btn-success" onclick="confirmOTP()" id="confirmOTPButton">Confirm</button> 
 			</div>
 			
@@ -73,11 +58,6 @@
     	}
 	});
 	
-	//onload
- 	var onloadCallback = function() {
-	};
-	  
-	
 	function confirmOTP() {
 		console.log("confirm otp for register : " + "${register}");
 		var dataObj = {
@@ -99,36 +79,7 @@
    				 }	  
    			  }
    		});
-	}
 	
-	function validateRegister(){
-		
-		var cap = $("[name='g-recaptcha-response']").val();
-		
-   		var dataObj = {
-   				"userId" : "${register}",
-   				"employeeId" : $("#registerForm #empId").val()
-   		}
-   		$.ajax({
-   			  type: "POST",
-   			  url: "/register/validateRegister",
-   			  data: dataObj,
-   			  success: function(response){
-   				 console.log(response);
-   				 if("success" == response.status){
-   					 
-   					 alert("ส่งรหัส OTP ไปยัง EMAIL ของท่านแล้ว");
-   					 
-   					// $("#registerForm #registerButton").hide();
-   					 $("#registerForm #empId").attr("readonly","readonly");
-   					 
-   					 $(".hide-otp").show();
-						
-   				 }else {
-   					 alert("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
-   				 }	  
-   			  }
-   		});
    	}
 	
 </script>
