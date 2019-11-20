@@ -58,9 +58,6 @@
 		            <div class="modal-body">
 		            	กรุณาระบุรหัสพนักงานและยืนยันตัวตน
 		            </div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
-		            </div>
 		        </div>
 		    </div>
 		</div>
@@ -101,14 +98,13 @@
 			$("#showModal").click();
 			return false;
 		}
-// 		else if( cap == "" || cap.length == 0 || null == cap ){
-// 			$("#modal-content-text").val("กรุณายืนยันตัวตน");	
-// 			$("#showModal").click();
-// 			return false;
-// 		}
+		else if( cap == "" || cap.length == 0 || null == cap ){
+			$("#modal-content-text").val("กรุณายืนยันตัวตน");	
+			$("#showModal").click();
+			return false;
+		}
 		else{
 			
-			//$("#captcha").val(cap);
 			$("#registerForm").submit();
 			
 			/*
