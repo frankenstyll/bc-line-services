@@ -61,6 +61,9 @@ public class LineMessageService {
     public void handleFlexMessageContent(String replyToken, FlexMessage messages) {
     	service.reply(replyToken, messages);
     }
+    public void handleRichFlexMessageContent(String replyToken, FlexMessage messages) {
+    	service.replyTextWithRich(replyToken, messages);
+    }
     
     public void handlePushTextContent(String userId , List<Message> messages) {
     	service.push(userId, messages);

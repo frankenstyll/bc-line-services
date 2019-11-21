@@ -17,6 +17,10 @@ public class LineBotService extends LineActionService {
         reply(replyToken, Collections.singletonList(message));
     }
 
+	public void replyTextWithRich(@NonNull String replyToken, @NonNull Message messages) {
+		actionMessage(replyToken, Collections.singletonList(messages) , true);
+	}
+	
     public void reply(@NonNull String replyToken, @NonNull List<Message> messages) {
         actionMessage(replyToken, messages);
     }
@@ -26,10 +30,11 @@ public class LineBotService extends LineActionService {
     }
 
     public void push(@NonNull String userId, @NonNull List<Message> messages) {
-        actionMessage(LineConstant.ACTION_PUSH, userId, messages);
+        actionMessage(LineConstant.ACTION_PUSH, userId, messages , false);
     }
     
     public void broadcast(@NonNull String userId, @NonNull List<Message> messages) {
-    	actionMessage(LineConstant.ACTION_BROADCAST, userId, messages);
+    	actionMessage(LineConstant.ACTION_BROADCAST, userId, messages , false);
     }
+
 }

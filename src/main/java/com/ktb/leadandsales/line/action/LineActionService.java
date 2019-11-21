@@ -1,18 +1,23 @@
 package com.ktb.leadandsales.line.action;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
+
 import com.ktb.leadandsales.constant.LineConstant;
+import com.ktb.leadandsales.line.rich.RichMenuHelper;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.Broadcast;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.response.BotApiResponse;
-import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import lombok.NonNull;
 
 @Service
 public abstract class LineActionService implements ILineActionService{
@@ -26,13 +31,22 @@ public abstract class LineActionService implements ILineActionService{
         }
     }
 
+    protected void actionMessage(@NonNull String to, @NonNull List<Message> messages , boolean rich) {
+    	actionMessage(LineConstant.ACTION_REPLY, to, messages , rich);
+    }
     protected void actionMessage(@NonNull String to, @NonNull List<Message> messages) {
-        actionMessage(LineConstant.ACTION_REPLY, to, messages);
+        actionMessage(LineConstant.ACTION_REPLY, to, messages , false);
     }
 
-    protected void actionMessage(@NonNull String actionType, @NonNull String to, @NonNull List<Message> messages) {
+    protected void actionMessage(@NonNull String actionType, @NonNull String to, @NonNull List<Message> messages , boolean rich) {
         checkReceiver(to);
         try {
+        	if(rich) {
+                String pathImageFlex = new ClassPathResource("richmenu/richmenu-flexs.jpg").getFile().getAbsolutePath();
+                String pathConfigFlex = new ClassPathResource("richmenu/richmenu-flexs.yml").getFile().getAbsolutePath();
+                RichMenuHelper.createRichMenu(lineMessagingClient, pathConfigFlex, pathImageFlex, to);
+        	}
+        	
             BotApiResponse response;
             if (actionType.equalsIgnoreCase(LineConstant.ACTION_PUSH)) {
                 response = lineMessagingClient.pushMessage(
@@ -53,6 +67,9 @@ public abstract class LineActionService implements ILineActionService{
             
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
+        } catch ( IOException io) {
+        	io.printStackTrace();
         }
     }
+    
 }

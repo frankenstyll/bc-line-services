@@ -12,7 +12,7 @@ import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.line.model.MessageBean;
 
 @RestController
-public class ReceiveMessage {
+public class ReceiveMessageController {
 
 	private static final Logger log = LoggerFactory.getLogger(LineBotController.class);
 	
