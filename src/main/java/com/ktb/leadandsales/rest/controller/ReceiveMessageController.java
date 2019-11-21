@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ktb.leadandsales.line.bot.controller.LineBotController;
 import com.ktb.leadandsales.line.bot.service.LineMessageService;
+import com.ktb.leadandsales.line.message.flex.supplier.WelcomeFlexMessageSupplier;
 import com.ktb.leadandsales.line.model.MessageBean;
 
 @RestController
@@ -47,6 +48,23 @@ public class ReceiveMessageController {
 			log.info("USERID : " + messageBean.getUserId());
 			log.info(""+messageBean.getMessages());
 			lineService.handleBroadCastMessageContent("userid text" , messageBean.getMessages());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+	}
+	
+	@PostMapping("/bcbot/richMenu")
+	public void richMenu(@RequestBody MessageBean messageBean) {
+		
+		log.info("[START]richMenu");
+		
+		try {
+			log.info("Call richMenu message");
+			log.info("USERID : " + messageBean.getUserId());
+			log.info(""+messageBean.getMessages());
+			lineService.handleRichFlexMessageContent("userid text" , new WelcomeFlexMessageSupplier().get());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
