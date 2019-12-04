@@ -10,8 +10,8 @@ import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
 @Service
 public class RegisterServicesImpl implements RegisterServices{
 
-	//private final String urlRegister = "https://webservice-bc.herokuapp.com/webservice-bc/validateRequestOTP";
-	private final String urlRegister = "http://localhost:8081/webservice-bc/validateRequestOTP";
+	private final String urlRegister = "https://webservice-bc.herokuapp.com/webservice-bc/validateRequestOTP";
+//	private final String urlRegister = "http://localhost:8081/webservice-bc/validateRequestOTP";
 	
 	private final String reCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
 	private final String secretKey = "6LfIgcMUAAAAALPRdNQyVSfPMv0BUZ4R46jy2yZs";
