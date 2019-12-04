@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,22 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.Gson;
 import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
 import com.ktb.leadandsales.mvc.model.RegisterModel;
+import com.ktb.leadandsales.services.RegisterServices;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 	
 	@Autowired
-	private RestTemplate restTemplate;
+	RegisterServices registerService;
 	
 	private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
 	
-	private final String reCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
-	private final String secretKey = "6LfIgcMUAAAAALPRdNQyVSfPMv0BUZ4R46jy2yZs";
 	
 	@RequestMapping("/rmregister")
 	public String getEmpLineId(HttpServletRequest request,ModelMap model) {
@@ -51,6 +49,7 @@ public class RegisterController {
 			@RequestParam(name="g-recaptcha-response") String captchaResponse, ModelMap model) {
 		log.info("[START]register");
 		
+		Gson g = new Gson();
 		String returnPage = "rmRegister";
 		
 		log.info("[USER_ID]" + register.getUserId());
@@ -60,31 +59,19 @@ public class RegisterController {
 		
 		log.info("verify reCaptcha v2" );
 		log.info("create url to verify google recaptcha");
-		
-		String verifyApiUrl = this.reCaptchaUrl + "?secret=" + this.secretKey + "&response="+captchaResponse;
-		
-		log.info("reCaptchaUrl = " + verifyApiUrl);
-		
-		log.info("call google recaptcha for verify captcha key");
-		
-		ReCaptchaResponse reResponse = restTemplate.exchange(verifyApiUrl, HttpMethod.POST
-				, null, ReCaptchaResponse.class).getBody();
-		
-		log.info("verify recaptcha is "+reResponse.isSuccess());
-		if(reResponse.isSuccess()) {
-			//success
-			model.addAttribute("message" , null);
-			returnPage = "rmConfirmOTP";
-		}else {
+		ReCaptchaResponse reResponse = registerService.validateRecaptcha(captchaResponse);
+		if(!reResponse.isSuccess()) {
 			model.addAttribute("message" , "กรุณาระบุ Captcha ใหม่อีกครั้ง");
-			returnPage = "rmRegister";
+			return "rmRegister";
 		}
 		
-		//TODO JOB
-		//1.generate otp
-		//2.generate ref number
-		//3.send otp number
-		//4.response result
+		//call register process
+		log.info("CALL Register Process");
+		String responseRegister = registerService.RegisterProcess(register.getUserId());
+		log.info(responseRegister);
+		if(null != responseRegister) {
+			Map<String,Object> p = g.fromJson(responseRegister, HashMap.class );
+		}
 		
 		log.info("[END]register");
 		return returnPage;
