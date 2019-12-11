@@ -27,7 +27,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     @Override
     public FlexMessage get() {
         final Box headerBlock = createHeaderBlock();
-        final Box heroBlock = createHeroBlock();
+        final Image heroBlock =  createHeaderImageBlock();// createHeroBlock();
        // final Box bodyBlock = createBodyBlock();
         final Box footerBlock =  createFooterBlock();
         final Bubble bubble = Bubble.builder()
@@ -83,16 +83,15 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     }
 
     
-    /*
-    private Image createHeroBlock() {
-        URI uriImage = URI.create("/images/logo1.jpg");
+    private Image createHeaderImageBlock() {
+        URI uriImage = URI.create("https://imgur.com/CPwJ2tj");
         return Image.builder()
                 .url(uriImage)
                 .size(Image.ImageSize.FULL_WIDTH)
                 .aspectRatio(Image.ImageAspectRatio.R20TO13)
                 .aspectMode(Image.ImageAspectMode.Cover)
                 .build();
-    }*/
+    }
 
     private Box createBodyBlock() {
         //final Box imageBlock = createThumbnailsBox();
