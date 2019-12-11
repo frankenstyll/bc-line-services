@@ -91,7 +91,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
 
     
     private Image createHeaderImageBlock() {
-        URI uriImage = URI.create("https://imgur.com/CPwJ2tj");
+        URI uriImage = URI.create("https://i.imgur.com/CPwJ2tj.jpg");
         return Image.builder()
                 .url(uriImage)
                 .size(Image.ImageSize.FULL_WIDTH)
