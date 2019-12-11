@@ -27,7 +27,7 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     @Override
     public FlexMessage get() {
         final Box headerBlock = createHeaderBlock();
-        final Image heroBlock =  createHeaderImageBlock();// createHeroBlock();
+        final Box heroBlock =  createHeroBlock();
        // final Box bodyBlock = createBodyBlock();
         final Box footerBlock =  createFooterBlock();
         final Bubble bubble = Bubble.builder()
@@ -53,21 +53,28 @@ public class WelcomeFlexMessageSupplier implements Supplier<FlexMessage> {
     
     private Box createHeroBlock() {
     	return Box.builder()
-                .layout(FlexLayout.VERTICAL)
-                .flex(2)
-                .contents(asList(
-                        Text.builder()
-                                .text(" DEMO RM ALERT "
-                                	)
-                                .weight(Text.TextWeight.BOLD)
-                                .gravity(FlexGravity.TOP)
-                                .size(FlexFontSize.XS)
-                                .color("#0066FF")
-                                .flex(1)
-                                .build()
-                ))
-                .build();
+    			.layout(FlexLayout.VERTICAL)
+    			.flex(2)
+    			.contents(asList(createHeaderImageBlock()))
+    			.build();
     }
+//    private Box createHeroBlock() {
+//    	return Box.builder()
+//                .layout(FlexLayout.VERTICAL)
+//                .flex(2)
+//                .contents(asList(
+//                        Text.builder()
+//                                .text(" DEMO RM ALERT "
+//                                	)
+//                                .weight(Text.TextWeight.BOLD)
+//                                .gravity(FlexGravity.TOP)
+//                                .size(FlexFontSize.XS)
+//                                .color("#0066FF")
+//                                .flex(1)
+//                                .build()
+//                ))
+//                .build();
+//    }
     
     private Box createFooterBlock() {
         URI uriIRegister = URI.create(
