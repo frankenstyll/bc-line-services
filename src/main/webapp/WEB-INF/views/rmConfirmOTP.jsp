@@ -25,11 +25,9 @@
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
-			<c:if test="${message ne null }">
-				<div class="alert alert-danger">
-					${message }
-				</div>
-			</c:if>
+			<div class="alert alert-danger" style="display: none;" id="alert-danger">
+				
+			</div>
 			<p>กรุณาระบุ OTP <font color="red">*</font></p>
 			
 			<div align="center" class="form-group">
@@ -64,7 +62,7 @@
 			<h5>Register success...</h5>
 		</div>
 		
-		<input type="hidden" name="otpRefNumber" id="otpRefNumber"/>
+		<input type="hidden" name="refNumber" id="refNumber" value="${ref_number }"/>
 		
 	</form>	
 	
@@ -86,9 +84,8 @@
 	
 	function resetOTP(){
 		var dataObj = {
-   				"userId" : "${register}",
+   				"userId" : "${userId}",
    				"employeeId" : $("#registerForm #empId").val(),
-   				"otpNumber" : $("#registerForm #otpNumber").val()
    		}
    		$.ajax({
    			  type: "POST",
@@ -113,7 +110,8 @@
 		var dataObj = {
    				"userId" : "${register}",
    				"employeeId" : $("#registerForm #empId").val(),
-   				"otpNumber" : $("#registerForm #otpNumber").val()
+   				"otp" : $("#registerForm #otpNumber").val(),
+   				"refNumber" : $("#registerForm #refNumber").val()
    		}
    		$.ajax({
    			  type: "POST",
@@ -125,7 +123,9 @@
    					$("#register-container").hide(); 
    					$("#success-container").show();
    				 }else {
-   					 alert("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
+   					 
+   					$("#registerForm #alert-danger").text("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
+   					$("#registerForm #alert-danger").show();
    				 }	  
    			  }
    		});

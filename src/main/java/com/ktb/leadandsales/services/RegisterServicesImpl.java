@@ -10,7 +10,8 @@ import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
 @Service
 public class RegisterServicesImpl implements RegisterServices{
 
-	private final String urlRegister = "https://webservice-bc.herokuapp.com/webservice-bc/validateRequestOTP";
+	private final String urlRegister = "https://webservice-bc.herokuapp.com/webservice-bc/registerRequestOTP";
+	private final String urlValidateOtp = "https://webservice-bc.herokuapp.com/webservice-bc/validateOTP";
 //	private final String urlRegister = "http://localhost:8081/webservice-bc/validateRequestOTP";
 	
 	private final String reCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
@@ -20,8 +21,8 @@ public class RegisterServicesImpl implements RegisterServices{
 	RestTemplate restTemplate;
 	
 	@Override
-	public String RegisterProcess(String userId) {
-	    return restTemplate.getForObject(urlRegister + "?userId=" + userId , String.class);
+	public String RegisterProcess(String empId) {
+	    return restTemplate.getForObject(urlRegister + "?employeeId=" + empId , String.class);
 	}
 
 	@Override
@@ -29,6 +30,14 @@ public class RegisterServicesImpl implements RegisterServices{
 		String verifyApiUrl = this.reCaptchaUrl + "?secret=" + this.secretKey + "&response="+captchaResponse;
 		return restTemplate.exchange(verifyApiUrl, HttpMethod.POST, null, ReCaptchaResponse.class).getBody();
 
+	}
+
+	@Override
+	public String validateOtp(String empId, String otp, String refNumber) {
+		 return restTemplate.getForObject(urlValidateOtp + "?employeeId=" + empId
+				 +"&otp=" + otp
+				 +"&refNumber="+refNumber
+				 , String.class);
 	}
 
 }

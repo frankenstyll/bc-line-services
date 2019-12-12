@@ -23,6 +23,7 @@
 </head>	
 <body>
 	<form id="registerForm" action="/register/validateRegister" method="post">
+		<input type="hidden" name="userId" value="${userId }"/>
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
