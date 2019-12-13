@@ -35,7 +35,7 @@
 			<p>กรุณาระบุรหัสพนักงาน <font color="red">*</font></p>
 			
 			<div align="center" >
-				<input type="text" class="form-control width-element" id="employeeId" name="employeeId"></input>
+				<input type="text" class="form-control width-element" id="employeeId" name="employeeId" maxlength="6"></input>
 			</div>
 			
 			<div align="center" class="padding-top">

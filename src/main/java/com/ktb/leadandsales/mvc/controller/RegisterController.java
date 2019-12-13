@@ -79,7 +79,7 @@ public class RegisterController {
 			
 			Map<String,Object> p = gs.fromJson(responseRegister, HashMap.class );
 			
-			if ( "0".equals(p.get("status")) ) {
+			if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
 				log.info("send OTP Success");
 				model.addAttribute("ref_number" , p.get("ref_number"));
 				returnPage = "rmConfirmOTP";
@@ -110,22 +110,24 @@ public class RegisterController {
 		Map<String,Object> resp = new HashMap<String, Object>();
 		
 		try {
-			//TODO 
 			//1.call service check otp
-			String responseValidate = registerService.validateOtp(
+			String responseValidate = registerService.validateOtp( register.getUserId(),
 					register.getEmployeeId(), register.getOtp(), register.getRefNumber());
 			
 			log.info(responseValidate);
 			if(null != responseValidate) {
 				Map<String,Object> p = gs.fromJson(responseValidate, HashMap.class );
 				//2.response result
-				if( "".equals(p.get(""))) {
-					
+				if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+					resp.put(LineConstant.STATUS_TEXT, LineConstant.SUCCESS_CODE);
+				}else {
+					resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);
+					resp.put(LineConstant.MESSAGE_TEXT, p.get(LineConstant.MESSAGE_TEXT));
 				}
-				resp.put(LineConstant.STATUS_TEXT, LineConstant.SUCCESS_CODE);
 				
-			}else {
-				throw new Exception("null");
+			} else {
+				resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);
+				resp.put(LineConstant.MESSAGE_TEXT, "เกิดข้อผิดพลาด รบกวนติดต่อผู้ดูแลระบบ");
 			}
 			
 		}catch(Exception e) {
@@ -144,17 +146,33 @@ public class RegisterController {
 		log.info("[START]resetOTP");
 		
 		Map<String,Object> resp = new HashMap<String, Object>();
-		
-		//TODO Job 
-		//1.call service reset OTP
-		//2.response result
 		try {
 			
-			resp.put("status", "success");
+			//1.call service reset otp
+			String responseReset = registerService.resetOtp(
+					register.getEmployeeId(), register.getOtp(), register.getRefNumber());
+			
+			log.info(responseReset);
+			if(null != responseReset) {
+				Map<String,Object> p = gs.fromJson(responseReset, HashMap.class );
+				//2.response result
+				if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+					resp.put(LineConstant.STATUS_TEXT, LineConstant.SUCCESS_CODE);
+					resp.put("ref_number" , p.get("ref_number"));
+				}else {
+					resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);
+					resp.put(LineConstant.MESSAGE_TEXT, p.get(LineConstant.MESSAGE_TEXT));
+				}
+				
+			} else {
+				resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);
+				resp.put(LineConstant.MESSAGE_TEXT, "เกิดข้อผิดพลาด รบกวนติดต่อผู้ดูแลระบบ");
+			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);
+			model.addAttribute(LineConstant.MESSAGE_TEXT, e.getMessage());
 		}
 		
 		log.info("[END]resetOTP");

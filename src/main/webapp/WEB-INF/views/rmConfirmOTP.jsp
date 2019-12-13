@@ -84,8 +84,9 @@
 	
 	function resetOTP(){
 		var dataObj = {
-   				"userId" : "${userId}",
-   				"employeeId" : $("#registerForm #empId").val(),
+				"employeeId" : $("#registerForm #empId").val(),
+   				"otp" : $("#registerForm #otpNumber").val(),
+   				"refNumber" : $("#registerForm #refNumber").val()
    		}
    		$.ajax({
    			  type: "POST",
@@ -93,7 +94,10 @@
    			  data: dataObj,
    			  success: function(response){
    				 console.log(response);
-   				 if("success" == response.status){
+   				 if("0" == response.status){
+   					 
+   					$("#registerForm #refNumber").val(response.ref_number);
+   					
    					$("#modal-body").text("Reset OTP เรียบร้อยแล้ว");
    					$("#showModal").click();
    				 }else {
@@ -108,7 +112,7 @@
 	function confirmOTP() {
 		console.log("confirm otp for register : " + "${register}");
 		var dataObj = {
-   				"userId" : "${register}",
+   				"userId" : "${userId}",
    				"employeeId" : $("#registerForm #empId").val(),
    				"otp" : $("#registerForm #otpNumber").val(),
    				"refNumber" : $("#registerForm #refNumber").val()
@@ -119,12 +123,12 @@
    			  data: dataObj,
    			  success: function(response){
    				 console.log(response);
-   				 if("success" == response.status){
+   				 if("0" == response.status){
    					$("#register-container").hide(); 
    					$("#success-container").show();
    				 }else {
    					 
-   					$("#registerForm #alert-danger").text("ไม่สามารถสมัครสมาชิกได้ รบกวนแจ้งผู้ดูแลระบบ");
+   					$("#registerForm #alert-danger").text(response.message);
    					$("#registerForm #alert-danger").show();
    				 }	  
    			  }

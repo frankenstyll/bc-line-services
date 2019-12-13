@@ -1,4 +1,4 @@
-package com.ktb.leadandsales.services;
+package com.ktb.leadandsales.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
+import com.ktb.leadandsales.services.RegisterServices;
 
 @Service
 public class RegisterServicesImpl implements RegisterServices{
 
 	private final String urlRegister = "https://webservice-bc.herokuapp.com/webservice-bc/registerRequestOTP";
 	private final String urlValidateOtp = "https://webservice-bc.herokuapp.com/webservice-bc/validateOTP";
+	private final String urlResetOtp = "https://webservice-bc.herokuapp.com/webservice-bc/resetOTP";
 //	private final String urlRegister = "http://localhost:8081/webservice-bc/validateRequestOTP";
 	
 	private final String reCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
@@ -33,8 +35,17 @@ public class RegisterServicesImpl implements RegisterServices{
 	}
 
 	@Override
-	public String validateOtp(String empId, String otp, String refNumber) {
-		 return restTemplate.getForObject(urlValidateOtp + "?employeeId=" + empId
+	public String validateOtp(String userId ,String empId, String otp, String refNumber) {
+		 return restTemplate.getForObject(urlValidateOtp + "?userId="+ userId
+				 +"&employeeId=" + empId
+				 +"&otp=" + otp
+				 +"&refNumber="+refNumber
+				 , String.class);
+	}
+
+	@Override
+	public String resetOtp(String empId, String otp, String refNumber) {
+		 return restTemplate.getForObject(urlResetOtp + "?"+"&employeeId=" + empId
 				 +"&otp=" + otp
 				 +"&refNumber="+refNumber
 				 , String.class);
