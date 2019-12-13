@@ -1,11 +1,17 @@
 package com.ktb.leadandsales.line.bot.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.gson.Gson;
+import com.ktb.leadandsales.constant.LineConstant;
 import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.line.message.flex.supplier.WelcomeFlexMessageSupplier;
+import com.ktb.leadandsales.services.RegisterServices;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.event.FollowEvent;
 import com.linecorp.bot.model.event.MessageEvent;
@@ -30,6 +36,9 @@ public class LineBotController {
     @Autowired
     LineMessagingClient lineMessagingClient;
     
+    @Autowired
+    RegisterServices registerServices;
+    
     @EventMapping
     public void handleFollow(FollowEvent event) {
     	log.info("[START] handleFollow");
@@ -41,10 +50,27 @@ public class LineBotController {
     
     @EventMapping
 	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
-    	WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
-    	welcome.setUserId(event.getSource().getUserId());
-    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
-//    	service.handleRichFlexMessageContent(event.getReplyToken(), welcome.get());
+    	
+    	String userId = event.getSource().getUserId();
+    	String resp = registerServices.isRegistered(userId);
+    	if(null != resp) {
+    		Map<String,Object> p = new Gson().fromJson(resp, HashMap.class );
+			//2.response result
+			if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+				if( "REGISTERED".equals(p.get(LineConstant.MESSAGE_TEXT)) ) {
+					log.info("User is already register");
+				}else {
+					WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
+			    	welcome.setUserId(event.getSource().getUserId());
+			    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
+				}
+				
+			}else {
+				WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
+		    	welcome.setUserId(event.getSource().getUserId());
+		    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
+			}
+		} 
     }
 
     @EventMapping

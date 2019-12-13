@@ -11,4 +11,6 @@ public interface RegisterServices {
 	public String validateOtp(String userId, String empId, String otp, String refNumber);
 	
 	public String resetOtp(String empId, String otp, String refNumber);
+	
+	public String isRegistered(String userId);
 }
