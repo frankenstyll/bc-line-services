@@ -79,13 +79,14 @@ public class RegisterController {
 			
 			Map<String,Object> p = gs.fromJson(responseRegister, HashMap.class );
 			
-			if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+			if( LineConstant.SUCCESS_CODE.equals(p.get(LineConstant.STATUS_TEXT))) {
 				log.info("send OTP Success");
 				model.addAttribute("ref_number" , p.get("ref_number"));
+				model.addAttribute("employee_id" , register.getEmployeeId());
 				returnPage = "rmConfirmOTP";
 			}else {
-				log.info("send OTP error " +  p.get("message"));
-				model.addAttribute(LineConstant.MESSAGE_TEXT , p.get("message"));
+				log.info("send OTP error " +  p.get(LineConstant.MESSAGE_TEXT));
+				model.addAttribute(LineConstant.MESSAGE_TEXT , p.get(LineConstant.MESSAGE_TEXT));
 				return "rmRegister";
 			}
 		}
@@ -118,7 +119,7 @@ public class RegisterController {
 			if(null != responseValidate) {
 				Map<String,Object> p = gs.fromJson(responseValidate, HashMap.class );
 				//2.response result
-				if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+				if( LineConstant.SUCCESS_CODE.equals(p.get(LineConstant.STATUS_TEXT))) {
 					resp.put(LineConstant.STATUS_TEXT, LineConstant.SUCCESS_CODE);
 				}else {
 					resp.put(LineConstant.STATUS_TEXT, LineConstant.FAIL_CODE);

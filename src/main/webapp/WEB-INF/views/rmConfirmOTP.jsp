@@ -35,10 +35,7 @@
 			</div>
 			
 			<div align="center" class="form-group">
-				 <button type="button" class="btn btn-primary" onclick="confirmOTP()" id="confirmOTPButton">Confirm</button> 
-			</div>
-			
-			<div align="center" class="form-group">
+				 <button type="button" class="btn btn-primary" onclick="confirmOTP()" id="confirmOTPButton">Confirm</button>
 				 <button type="button" class="btn btn-success" onclick="resetOTP()" id="resetOTPButton">ส่ง OTP อีกครั้ง</button> 
 			</div>
 			
@@ -63,6 +60,7 @@
 		</div>
 		
 		<input type="hidden" name="refNumber" id="refNumber" value="${ref_number }"/>
+		<input type="hidden" name="employeeId" id="employeeId" value="${employee_id }"/>
 		
 	</form>	
 	
@@ -84,7 +82,7 @@
 	
 	function resetOTP(){
 		var dataObj = {
-				"employeeId" : $("#registerForm #empId").val(),
+				"employeeId" : $("#registerForm #employeeId").val(),
    				"otp" : $("#registerForm #otpNumber").val(),
    				"refNumber" : $("#registerForm #refNumber").val()
    		}
@@ -113,7 +111,7 @@
 		console.log("confirm otp for register : " + "${register}");
 		var dataObj = {
    				"userId" : "${userId}",
-   				"employeeId" : $("#registerForm #empId").val(),
+   				"employeeId" : $("#registerForm #employeeId").val(),
    				"otp" : $("#registerForm #otpNumber").val(),
    				"refNumber" : $("#registerForm #refNumber").val()
    		}
