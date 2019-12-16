@@ -1,6 +1,8 @@
 package com.ktb.leadandsales.line.bot.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,6 +17,8 @@ import com.ktb.leadandsales.services.RegisterServices;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.event.FollowEvent;
 import com.linecorp.bot.model.event.MessageEvent;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.event.UnfollowEvent;
 import com.linecorp.bot.model.event.message.AudioMessageContent;
 import com.linecorp.bot.model.event.message.ImageMessageContent;
@@ -52,13 +56,20 @@ public class LineBotController {
 	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
     	
     	String userId = event.getSource().getUserId();
-    	String resp = registerServices.isRegistered(userId);
+    	String resp = registerServices.isRegistered(userId , "");
     	if(null != resp) {
     		Map<String,Object> p = new Gson().fromJson(resp, HashMap.class );
 			//2.response result
 			if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
 				if( "REGISTERED".equals(p.get(LineConstant.MESSAGE_TEXT)) ) {
+					
 					log.info("User is already register");
+					List<Message> lstMessage = new ArrayList<Message>();
+					Message m = new TextMessage("We have nothing to answer!");
+					lstMessage.add(m);
+					
+					service.handlePushTextContent(userId, lstMessage);
+					
 				}else {
 					WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
 			    	welcome.setUserId(event.getSource().getUserId());

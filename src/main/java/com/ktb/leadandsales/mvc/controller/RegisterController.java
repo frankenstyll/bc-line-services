@@ -1,6 +1,8 @@
 package com.ktb.leadandsales.mvc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +20,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ktb.leadandsales.constant.LineConstant;
+import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
 import com.ktb.leadandsales.mvc.model.RegisterModel;
 import com.ktb.leadandsales.services.RegisterServices;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TextMessage;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+	
+    @Autowired
+    LineMessageService service;
 	
 	@Autowired
 	RegisterServices registerService;
@@ -41,11 +49,41 @@ public class RegisterController {
 		
 		log.info("[USER_ID]" + request.getParameter("register"));
 		String userId = request.getParameter("register");
-		model.addAttribute("userId", userId);
-		model.addAttribute(LineConstant.MESSAGE_TEXT , null);
 		
-		log.info("[END]getEmpLineId");
-		return "rmRegister";
+		log.info("CALL isRegister Process");
+		String resp = registerService.isRegistered(userId , "");
+		log.info(resp);
+		if(null != resp) {
+			
+			Map<String,Object> p = gs.fromJson(resp, HashMap.class );
+			
+			if( LineConstant.SUCCESS_CODE.equals(p.get(LineConstant.STATUS_TEXT))) {
+				
+				if("REGISTERED".equals(p.get(LineConstant.MESSAGE_TEXT))) {
+					List<Message> lstMessage = new ArrayList<Message>();
+					Message m = new TextMessage("User is already register");
+					lstMessage.add(m);
+					
+					service.handlePushTextContent(userId, lstMessage);
+					
+					return "alreadyRegister";
+				}else {
+					
+					model.addAttribute("userId", userId);
+					model.addAttribute(LineConstant.MESSAGE_TEXT , null);
+					
+					log.info("[END]getEmpLineId");
+					return "rmRegister";
+				}
+				
+			}else {
+				model.addAttribute(LineConstant.MESSAGE_TEXT , p.get(LineConstant.MESSAGE_TEXT));
+				return "error-page";
+			}
+		}else {
+			
+			return "";
+		}
 	}
 	
 	@PostMapping("/validateRegister")
@@ -112,6 +150,7 @@ public class RegisterController {
 		
 		try {
 			//1.call service check otp
+			log.info("call validate OTP");
 			String responseValidate = registerService.validateOtp( register.getUserId(),
 					register.getEmployeeId(), register.getOtp(), register.getRefNumber());
 			
@@ -157,7 +196,7 @@ public class RegisterController {
 			if(null != responseReset) {
 				Map<String,Object> p = gs.fromJson(responseReset, HashMap.class );
 				//2.response result
-				if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+				if( LineConstant.SUCCESS_CODE.equals(p.get(LineConstant.STATUS_TEXT))) {
 					resp.put(LineConstant.STATUS_TEXT, LineConstant.SUCCESS_CODE);
 					resp.put("ref_number" , p.get("ref_number"));
 				}else {

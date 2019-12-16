@@ -25,10 +25,12 @@
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
+			
+			<p>กรุณาระบุ OTP <font color="red">*</font></p>
+			
 			<div class="alert alert-danger" style="display: none;" id="alert-danger">
 				
 			</div>
-			<p>กรุณาระบุ OTP <font color="red">*</font></p>
 			
 			<div align="center" class="form-group">
 				 <input type="text" class="form-control width-element" id="otpNumber" ></input>
@@ -83,7 +85,6 @@
 	function resetOTP(){
 		var dataObj = {
 				"employeeId" : $("#registerForm #employeeId").val(),
-   				"otp" : $("#registerForm #otpNumber").val(),
    				"refNumber" : $("#registerForm #refNumber").val()
    		}
    		$.ajax({

@@ -27,12 +27,14 @@
 		<div class="container-fluid text-center" id="register-container">
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
+
+			<p>กรุณาระบุรหัสพนักงาน <font color="red">*</font></p>
+			
 			<c:if test="${message ne null }">
 				<div class="alert alert-danger">
 					${message }
 				</div>
 			</c:if>
-			<p>กรุณาระบุรหัสพนักงาน <font color="red">*</font></p>
 			
 			<div align="center" >
 				<input type="text" class="form-control width-element" id="employeeId" name="employeeId" maxlength="6"></input>

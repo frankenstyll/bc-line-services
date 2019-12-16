@@ -12,5 +12,5 @@ public interface RegisterServices {
 	
 	public String resetOtp(String empId, String otp, String refNumber);
 	
-	public String isRegistered(String userId);
+	public String isRegistered(String userId , String employeeId);
 }

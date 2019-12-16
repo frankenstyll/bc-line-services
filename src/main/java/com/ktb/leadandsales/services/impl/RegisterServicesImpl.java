@@ -45,15 +45,16 @@ public class RegisterServicesImpl implements RegisterServices{
 
 	@Override
 	public String resetOtp(String empId, String otp, String refNumber) {
-		 return restTemplate.getForObject(this.urlResetOtp + "?"+"&employeeId=" + empId
+		 return restTemplate.getForObject(this.urlResetOtp + "?employeeId=" + empId
 				 +"&otp=" + otp
 				 +"&refNumber="+refNumber
 				 , String.class);
 	}
 
 	@Override
-	public String isRegistered(String userId) {
-		 return restTemplate.getForObject(this.urlIsRegistered + "?"+"&userId=" + userId
+	public String isRegistered(String userId, String employeeId) {
+		 return restTemplate.getForObject(this.urlIsRegistered + "?userId=" + userId 
+				 +"&employeeId="+ employeeId
 				 , String.class);
 	}
 
