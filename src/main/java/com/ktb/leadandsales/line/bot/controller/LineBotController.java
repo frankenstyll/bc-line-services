@@ -56,7 +56,9 @@ public class LineBotController {
 	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
     	
     	String userId = event.getSource().getUserId();
+    	log.info("Call isRegistered");
     	String resp = registerServices.isRegistered(userId , "");
+    	log.info(resp);
     	if(null != resp) {
     		Map<String,Object> p = new Gson().fromJson(resp, HashMap.class );
 			//2.response result
