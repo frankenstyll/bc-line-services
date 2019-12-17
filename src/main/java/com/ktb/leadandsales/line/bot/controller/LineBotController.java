@@ -62,7 +62,7 @@ public class LineBotController {
     	if(null != resp) {
     		Map<String,Object> p = new Gson().fromJson(resp, HashMap.class );
 			//2.response result
-			if( LineConstant.STATUS_TEXT.equals(p.get(LineConstant.SUCCESS_CODE))) {
+			if( p.get(LineConstant.SUCCESS_CODE).equals(LineConstant.STATUS_TEXT)) {
 				if( "REGISTERED".equals(p.get(LineConstant.MESSAGE_TEXT)) ) {
 					
 					log.info("User is already register");
