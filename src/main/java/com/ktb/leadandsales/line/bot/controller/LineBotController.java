@@ -73,15 +73,36 @@ public class LineBotController {
 					service.handlePushTextContent(userId, lstMessage);
 					
 				}else {
-					WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
-			    	welcome.setUserId(event.getSource().getUserId());
-			    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
+					
+					log.info("New register");
+					List<Message> lstMessage = new ArrayList<Message>();
+					Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับข้อมูลตาม Link ด้านล่าง");
+					Message re = new TextMessage("line://app/1653363080-pV5koKLq");
+					lstMessage.add(m);
+					lstMessage.add(re);
+					
+					service.handlePushTextContent(userId, lstMessage);
+					
+					
+//					WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
+//			    	welcome.setUserId(event.getSource().getUserId());
+//			    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
 				}
 				
 			}else {
-				WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
-		    	welcome.setUserId(event.getSource().getUserId());
-		    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
+				
+				log.info("New register");
+				List<Message> lstMessage = new ArrayList<Message>();
+				Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับข้อมูลตาม Link ด้านล่าง");
+				Message re = new TextMessage("line://app/1653363080-pV5koKLq");
+				lstMessage.add(m);
+				lstMessage.add(re);
+				
+				service.handlePushTextContent(userId, lstMessage);
+				
+//				WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
+//		    	welcome.setUserId(event.getSource().getUserId());
+//		    	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
 			}
 		} 
     }
