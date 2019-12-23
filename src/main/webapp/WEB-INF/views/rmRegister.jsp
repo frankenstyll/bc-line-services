@@ -26,6 +26,11 @@
 	<form id="registerForm" action="/register/validateRegister" method="post">
 		<input type="hidden" name="userId" value="${userId }"/>
 		<div class="container-fluid text-center" id="register-container">
+		
+			<div>
+				<input type="text" id="liffTest"/>
+			</div>
+		
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
 
@@ -80,7 +85,7 @@
 		
 		liff.init(function (data) {});
 		
-		alert(liff.isInClient());
+		$("#liffTest").val(liff.isInClient());
 		
     	initPage();
     	
