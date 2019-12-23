@@ -28,7 +28,7 @@
 		<div class="container-fluid text-center" id="register-container">
 		
 			<div>
-				<input type="text" id="liffTest"/>
+				<input type="text" id="testLiff"/>
 			</div>
 		
 			<br/>
@@ -83,9 +83,16 @@
   
 	$( document ).ready(function() {
 		
-		liff.init(function (data) {});
-		
-		$("#liffTest").val(liff.isInClient());
+		liff.init( data => {
+		    // Now you can call LIFF API
+		    const userId = data.context.userId;
+		    $("#testLiff").val(userId);
+		  },
+		  err => {
+		    // LIFF initialization failed
+		  }
+		);
+
 		
     	initPage();
     	
