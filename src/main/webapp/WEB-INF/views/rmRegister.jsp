@@ -20,6 +20,7 @@
 		
 	</style>
 	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=th" async defer></script>
+	<script src="https://d.line-scdn.net/liff/1.0/sdk.js" /></script>
 </head>	
 <body>
 	<form id="registerForm" action="/register/validateRegister" method="post">
@@ -76,6 +77,11 @@
 <script>
   
 	$( document ).ready(function() {
+		
+		liff.init(function (data) {});
+		
+		alert(liff.isInClient());
+		
     	initPage();
     	
     	function initPage(){
