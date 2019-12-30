@@ -66,6 +66,10 @@
 		        </div>
 		    </div>
 		</div>
+		
+		<p id="status"></p>
+		<p id="text"></p>
+		<p></p>
 	</form>	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -88,8 +92,10 @@
 	   			  type: "GET",
 	   			  url: "/register/isRegistered?userId="+userId,
 	   			  success: function(response){
-	   				$("#modal-content-text").val(response.status + "/" +  response.message_text);
-	   				$("#showModal").click();
+	   				
+	   				  $("#status").text(response.status);
+	   				  $("#text").text(response.message_text);
+	   				  
 	   				 if("0" == response.status){
 	   					if("REGISTERED" == response.message_text){
 	   						window.location.href = "/register/alreadyRegister";	   						 
