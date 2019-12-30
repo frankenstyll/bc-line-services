@@ -94,10 +94,10 @@
 	   			  success: function(response){
 	   				
 	   				  $("#status").text(response.status);
-	   				  $("#text").text(response.message_text);
+	   				  $("#text").text(response.message);
 	   				  
 	   				 if("0" == response.status){
-	   					if("REGISTERED" == response.message_text){
+	   					if("REGISTERED" == response.message){
 	   						window.location.href = "/register/alreadyRegister";	   						 
 	   					}
 	   				 } 
