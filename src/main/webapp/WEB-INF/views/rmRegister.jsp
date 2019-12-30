@@ -83,6 +83,20 @@
 		    // Now you can call LIFF API
 		    const userId = data.context.userId;
 		    $("#userId").val(userId);
+		    
+	   		$.ajax({
+	   			  type: "GET",
+	   			  url: "/register/isRegistered?userId="+userId,
+	   			  success: function(response){
+	   				 console.log(response);
+	   				 if("0" == response.status){
+	   					if("REGISTERED" == response.MESSAGE_TEXT){
+	   						window.location.href = "/register/alreadyRegister";	   						 
+	   					}
+	   				 } 
+	   			  }
+	   		});
+			
 		  },
 		  err => {
 		    // LIFF initialization failed

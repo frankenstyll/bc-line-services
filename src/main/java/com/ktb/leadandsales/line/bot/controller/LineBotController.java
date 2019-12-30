@@ -56,7 +56,7 @@ public class LineBotController {
     
     @EventMapping
 	public void handleTextMessage(MessageEvent<TextMessageContent> event) {
-    	
+    	log.info("handleTextMessage");
     	String userId = event.getSource().getUserId();
     	log.info("Call isRegistered");
     	String resp = registerServices.isRegistered(userId , "");

@@ -1,8 +1,6 @@
 package com.ktb.leadandsales.mvc.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,6 @@ import com.ktb.leadandsales.line.bot.service.LineMessageService;
 import com.ktb.leadandsales.mvc.model.ReCaptchaResponse;
 import com.ktb.leadandsales.mvc.model.RegisterModel;
 import com.ktb.leadandsales.services.RegisterServices;
-import com.linecorp.bot.model.message.Message;
-import com.linecorp.bot.model.message.TextMessage;
 
 @Controller
 @RequestMapping("/register")
@@ -42,14 +39,40 @@ public class RegisterController {
 	
 	private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
 	
+	@RequestMapping("/alreadyRegister")
+	public String alreadyRegister() {
+		log.info("user has already register");
+		return "alreadyRegister";
+	}
+	
+	@GetMapping("/isRegistered")
+	@ResponseBody
+	public Map<String,Object> isRegistered(HttpServletRequest request , ModelMap model) {
+		log.info("[START]isRegistered");
+		String userId = request.getParameter("userId");
+		Map<String,Object> p = new HashMap<String, Object>();
+		log.info("CALL isRegister Process");
+		String resp = registerService.isRegistered(userId , "");
+		
+		log.info(resp);
+		if(null != resp) {
+			 p = gs.fromJson(resp, HashMap.class );
+		}
+		log.info("[END]isRegistered");
+		return p;
+	}
+	
 	
 	@RequestMapping("/rmregister")
-	public String getEmpLineId(HttpServletRequest request,ModelMap model) {
-		log.info("[START]getEmpLineId");
+	public String rmregister(HttpServletRequest request,ModelMap model) {
+		log.info("[START]rmregister");
 		
-		log.info("[USER_ID]" + request.getParameter("register"));
+		model.addAttribute(LineConstant.MESSAGE_TEXT , null);
+		log.info("[END]rmregister");
+		return "rmRegister";
+		
+		/*
 		String userId = request.getParameter("register");
-		
 		log.info("CALL isRegister Process");
 		String resp = registerService.isRegistered(userId , "");
 		log.info(resp);
@@ -84,6 +107,7 @@ public class RegisterController {
 			
 			return "";
 		}
+		*/
 	}
 	
 	@PostMapping("/validateRegister")
