@@ -19,6 +19,7 @@
 		}
 		
 	</style>
+	<script src="https://d.line-scdn.net/liff/1.0/sdk.js" /></script>
 </head>	
 <body>
 	<form id="registerForm" >
