@@ -46,9 +46,11 @@ public class LineBotController {
     @EventMapping
     public void handleFollow(FollowEvent event) {
     	log.info("[START] handleFollow");
+    	/**
     	WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
     	welcome.setUserId(event.getSource().getUserId());
     	service.handleFlexMessageContent(event.getReplyToken(), welcome.get());
+    	*/
     	log.info("[END] handleFollow");
     }
     
@@ -76,13 +78,12 @@ public class LineBotController {
 					
 					log.info("New register");
 					List<Message> lstMessage = new ArrayList<Message>();
-					Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับข้อมูลตาม Link ด้านล่าง");
+					Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับการแจ้งเตือนข้อมูลตาม Link ด้านล่าง");
 					Message re = new TextMessage("line://app/1653363080-pV5koKLq");
 					lstMessage.add(m);
 					lstMessage.add(re);
 					
 					service.handlePushTextContent(userId, lstMessage);
-					
 					
 //					WelcomeFlexMessageSupplier welcome = new WelcomeFlexMessageSupplier();
 //			    	welcome.setUserId(event.getSource().getUserId());
@@ -93,7 +94,7 @@ public class LineBotController {
 				
 				log.info("New register");
 				List<Message> lstMessage = new ArrayList<Message>();
-				Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับข้อมูลตาม Link ด้านล่าง");
+				Message m = new TextMessage("กรุณาสมัครสมาชิกเพื่อรับการแจ้งเตือนข้อมูลตาม Link ด้านล่าง");
 				Message re = new TextMessage("line://app/1653363080-pV5koKLq");
 				lstMessage.add(m);
 				lstMessage.add(re);
