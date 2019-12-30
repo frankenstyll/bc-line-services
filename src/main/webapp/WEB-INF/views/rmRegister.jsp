@@ -88,9 +88,10 @@
 	   			  type: "GET",
 	   			  url: "/register/isRegistered?userId="+userId,
 	   			  success: function(response){
-	   				 console.log(response);
+	   				$("#modal-content-text").val(response.status + "/" +  response.message_text);
+	   				$("#showModal").click();
 	   				 if("0" == response.status){
-	   					if("REGISTERED" == response.MESSAGE_TEXT){
+	   					if("REGISTERED" == response.message_text){
 	   						window.location.href = "/register/alreadyRegister";	   						 
 	   					}
 	   				 } 
