@@ -23,6 +23,7 @@
 <body>
 	<form id="registerForm" >
 		<div class="container-fluid text-center" id="register-container">
+			
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
 			
@@ -63,6 +64,7 @@
 		
 		<input type="hidden" name="refNumber" id="refNumber" value="${ref_number }"/>
 		<input type="hidden" name="employeeId" id="employeeId" value="${employee_id }"/>
+		<input type="text" name="userId" id="userId"/>
 		
 	</form>	
 	
@@ -80,6 +82,17 @@
     		//captcha sit key
     		//6LfIgcMUAAAAAJfZq3mDg2j9Hi3TQv0mxGa0BnrR
     	}
+    	
+    	liff.init( data => {
+		    // Now you can call LIFF API
+		    const userId = data.context.userId;
+		    $("#userId").val(userId);
+		  },
+		  err => {
+		    // LIFF initialization failed
+		  }
+		);
+    	
 	});
 	
 	function resetOTP(){
@@ -111,7 +124,7 @@
 	function confirmOTP() {
 		console.log("confirm otp for register : " + "${register}");
 		var dataObj = {
-   				"userId" : "${userId}",
+   				"userId" : $("#registerForm #userId").val(),
    				"employeeId" : $("#registerForm #employeeId").val(),
    				"otp" : $("#registerForm #otpNumber").val(),
    				"refNumber" : $("#registerForm #refNumber").val()

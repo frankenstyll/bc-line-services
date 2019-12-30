@@ -24,12 +24,8 @@
 </head>	
 <body>
 	<form id="registerForm" action="/register/validateRegister" method="post">
-		<input type="hidden" name="userId" value="${userId }"/>
+		<input type="hidden" name="userId" id="userId" />
 		<div class="container-fluid text-center" id="register-container">
-		
-			<div>
-				<input type="text" id="testLiff"/>
-			</div>
 		
 			<br/>
 			<h5>RM สมัครสมาชิก</h5>
@@ -86,13 +82,12 @@
 		liff.init( data => {
 		    // Now you can call LIFF API
 		    const userId = data.context.userId;
-		    $("#testLiff").val(userId);
+		    $("#userId").val(userId);
 		  },
 		  err => {
 		    // LIFF initialization failed
 		  }
 		);
-
 		
     	initPage();
     	
