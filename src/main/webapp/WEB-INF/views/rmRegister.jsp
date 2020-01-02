@@ -67,8 +67,6 @@
 		    </div>
 		</div>
 		
-		<p id="status"></p>
-		<p id="text"></p>
 		<p></p>
 	</form>	
 	
@@ -88,19 +86,20 @@
 		    const userId = data.context.userId;
 		    $("#userId").val(userId);
 		    
+		    $.blockUI();
+		    
 	   		$.ajax({
 	   			  type: "GET",
 	   			  url: "/register/isRegistered?userId="+userId,
 	   			  success: function(response){
-	   				
-	   				  $("#status").text(response.status);
-	   				  $("#text").text(response.message);
 	   				  
+	   				 $.unblockUI();
 	   				 if("0" == response.status){
 	   					if("REGISTERED" == response.message){
 	   						window.location.href = "/register/alreadyRegister";	   						 
 	   					}
 	   				 } 
+	   				
 	   			  }
 	   		});
 			
