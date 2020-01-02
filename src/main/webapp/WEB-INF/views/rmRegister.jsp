@@ -67,6 +67,17 @@
 		    </div>
 		</div>
 		
+		
+		<div id="dialogBlockUI" class="modal fade bd-example-modal-sm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-sm">
+		        <div class="modal-content">
+		            <div class="modal-body">
+		            	<img alt="" src="https://www.montclair-hostel.com/wp-content/uploads/2017/01/loading5.gif">
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
 		<p></p>
 	</form>	
 	
@@ -80,14 +91,25 @@
 </body>
 <script>
   
+  	function blockUi(){
+		$.blockUI({
+			//message: '<img width="20" height="20" src="https://www.montclair-hostel.com/wp-content/uploads/2017/01/loading5.gif" />',
+			message: '<img width="150" height="100" src="https://flevix.com/wp-content/uploads/2019/07/Ring-Preloader.gif" />',
+		  css: {
+		  	backgroundColor: 'transparent',
+		    border: '0'
+		    }
+	  	});
+  	}
+  
 	$( document ).ready(function() {
+		
+		blockUi();
 		
 		liff.init( data => {
 		    // Now you can call LIFF API
 		    const userId = data.context.userId;
 		    $("#userId").val(userId);
-		    
-		    $.blockUI();
 		    
 	   		$.ajax({
 	   			  type: "GET",
